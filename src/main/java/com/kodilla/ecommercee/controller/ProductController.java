@@ -1,38 +1,18 @@
-package com.kodilla.ecommercee;
-
+package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.ProductDto;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-
-/*
-lista wszystkich produktów
-pobranie pojedynczego produktu
-utworzenie produktu
-aktualizacja danych produktu
-usunięcie produktu
- */
-
 @RestController
 @RequestMapping("/v1/product")
 public class ProductController {
-
-    ProductDto computer = new ProductDto(1L, "computer", "test");
-    ProductDto laptop = new ProductDto(2L, "laptop", "test");
-    List<ProductDto> products = new ArrayList<>();
-
-    private List<ProductDto> returnListProduct() {
-        if (products.isEmpty()) {
-            products.add(computer);
-            products.add(laptop);
-        }
-        return products;
-    }
+    private List<ProductDto> products = new ArrayList<>();
+    private ProductDto computer;
+    private ProductDto laptop;
 
     @GetMapping(value = "getProducts")
     public List<ProductDto> getProducts() {
@@ -51,9 +31,8 @@ public class ProductController {
     }
 
     @PostMapping(value = "createProduct", consumes = APPLICATION_JSON_VALUE)
-    public ProductDto createProduct(@RequestBody ProductDto productDto) {
+    public void createProduct(@RequestBody ProductDto productDto) {
         products.add(productDto);
-        return productDto;
     }
 
     @PutMapping(value = "updateProduct")
@@ -76,5 +55,15 @@ public class ProductController {
                 products.remove(i);
             }
         }
+    }
+
+    private List<ProductDto> returnListProduct() {
+        computer = new ProductDto(1L, "computer", "test");
+        laptop = new ProductDto(2L, "laptop", "test");
+        if (products.isEmpty()) {
+            products.add(computer);
+            products.add(laptop);
+        }
+        return products;
     }
 }
