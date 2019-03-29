@@ -11,8 +11,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1/product")
 public class ProductController {
     private List<ProductDto> products = new ArrayList<>();
-    private ProductDto computer;
-    private ProductDto laptop;
 
     @GetMapping(value = "getProducts")
     public List<ProductDto> getProducts() {
@@ -58,8 +56,8 @@ public class ProductController {
     }
 
     private List<ProductDto> returnListProduct() {
-        computer = new ProductDto(1L, "computer", "test");
-        laptop = new ProductDto(2L, "laptop", "test");
+        ProductDto computer = new ProductDto(1L, "computer", "test");
+        ProductDto laptop = new ProductDto(2L, "laptop", "test");
         if (products.isEmpty()) {
             products.add(computer);
             products.add(laptop);
