@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("/v1/cart")
 public class CartController {
@@ -22,17 +24,17 @@ public class CartController {
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createCart")
+    @RequestMapping(method = RequestMethod.POST, value = "createCart", consumes = APPLICATION_JSON_VALUE)
     public void createCart(@RequestBody CartDto cartDto) {
         Cart newCart = cartMapper.mapToCart(cartDto);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createOrder")
+    @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = APPLICATION_JSON_VALUE)
     public void createOrder(@RequestBody CartDto cartDto) {
         Order newOrder = new Order(cartMapper.mapToCart(cartDto));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addItemToCart")
+    @RequestMapping(method = RequestMethod.POST, value = "addItemToCart", consumes = APPLICATION_JSON_VALUE)
     public void addItemToCart(@RequestBody ProductDto productDto) {
         Cart newCart = new Cart();
         newCart.getProducts().add(productMapper.mapToProduct(productDto));
