@@ -36,9 +36,7 @@ public class OrderController {
 
     @PostMapping("/createOrder")
     private void createOrder(@RequestBody OrderDto orderDto){
-        System.out.println(orders);
         orders.add(orderDto);
-        System.out.println(orders);
     }
 
     @GetMapping("/getOrder")
