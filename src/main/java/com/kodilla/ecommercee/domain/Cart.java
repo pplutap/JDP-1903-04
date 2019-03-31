@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.ArrayList;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class Cart {
@@ -14,7 +15,9 @@ public class Cart {
     private String cartName;
     private List<Product> products = new ArrayList<>();
 
-    public Cart(String cartName) {
+    public Cart(Long cartId, String cartName) {
+        this.cartId = cartId;
         this.cartName = cartName;
     }
+
 }
