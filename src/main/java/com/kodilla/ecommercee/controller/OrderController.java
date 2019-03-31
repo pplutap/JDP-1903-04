@@ -17,21 +17,11 @@ public class OrderController {
     //aktualizacja zamówienia ok
     //usunięcie zamówienia ok
 
-    Item item0 = new Item(0L,0,new BigDecimal("0"));
-    Item item1 = new Item(10125L,3,new BigDecimal("124.99"));
-    Item item2 = new Item(10126L,1,new BigDecimal("299"));
-    Item item3 = new Item(10127L,9,new BigDecimal("32.5"));
-    OrderDto order0 = new OrderDto(0L, Arrays.asList(item0));
-    OrderDto order1 = new OrderDto(123L, Arrays.asList(item1,item2));
-    OrderDto order2 = new OrderDto(124L, Arrays.asList(item2,item3));
     List<OrderDto> orders = new ArrayList<>();
-
 
     @GetMapping("/getOrders")
     private List<OrderDto> getOrders() {
-        orders.add(order1);
-        orders.add(order2);
-        return orders;
+        return getOrderDtos();
     }
 
     @PostMapping("/createOrder")
@@ -41,35 +31,30 @@ public class OrderController {
 
     @GetMapping("/getOrder")
     private OrderDto getOrder(@RequestParam("orderId") long orderId){
-        orders.add(order2);
-        OrderDto result = order0;
+        getOrderDtos();
         for (OrderDto order:orders) {
             if(order.getOrderId() == orderId){
-                result = order;
+                return order;
             }
         }
-        return result;
+        return null;
     }
 
     @PutMapping("/updateOrder")
     private OrderDto updateOrder(@RequestBody OrderDto orderDto){
-        OrderDto result = order0;
         Long orderToUpdateId = orderDto.getOrderId();
         List<Item> updatedItems = orderDto.getItems();
         for (OrderDto order:orders){
             if(order.getOrderId().equals(orderToUpdateId)){
                 order.setItems(updatedItems);
-                result=order;
             }
         }
-        return result;
+        return orderDto;
     }
 
     @DeleteMapping("/deleteOrder")
     public void deleteOrder(@RequestParam("id") long id){
-
         getOrders();
-
         for (int i = 0; i < orders.size(); i++) {
             if (orders.get(i).getOrderId().equals(id)) {
                 orders.remove(i);
@@ -77,4 +62,22 @@ public class OrderController {
         }
     }
 
+    private List<Item> getItems1(){
+        Item item1 = new Item(10125L,3,new BigDecimal("124.99"));
+        Item item2 = new Item(10126L,1,new BigDecimal("299"));
+        return Arrays.asList(item1,item2);
+    }
+    private List<Item> getItems2(){
+        Item item2 = new Item(10126L,1,new BigDecimal("299"));
+        Item item3 = new Item(10127L,9,new BigDecimal("32.5"));
+        return Arrays.asList(item2,item3);
+    }
+
+    private List<OrderDto> getOrderDtos(){
+        OrderDto order1 = new OrderDto(123L, getItems1());
+        OrderDto order2 = new OrderDto(124L, getItems2());
+        orders.add(order1);
+        orders.add(order2);
+        return orders;
+    }
 }
