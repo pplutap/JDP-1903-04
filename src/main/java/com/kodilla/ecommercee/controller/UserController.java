@@ -22,12 +22,12 @@ public class UserController {
     @PutMapping(value = "badUser")
     public UserDto badUser(@RequestBody Long id) {
         UserDto user = getUserForSpecificID(id);
-        user.setStatus((long) 0);
+        user.setStatus(false);
         return user;
     }
 
     @GetMapping(value = "getToken", consumes = APPLICATION_JSON_VALUE)
-    public Long getToken(@RequestBody UserDto userDto){
+    public Long getToken(@RequestBody Long userId){
         Random random = new Random();
         Long randomLong = random.nextLong();
         return randomLong;
