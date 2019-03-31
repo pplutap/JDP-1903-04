@@ -34,7 +34,7 @@ public class ProductController {
     }
 
     @PutMapping(value = "updateProduct")
-    public ProductDto updateTask(@RequestBody ProductDto productDto) {
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
         Long productId = productDto.getProductId();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getProductId().equals(productId)) {
