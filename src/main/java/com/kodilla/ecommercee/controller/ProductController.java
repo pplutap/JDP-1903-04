@@ -46,7 +46,7 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "deleteProduct")
-    public void deleteTask(@RequestParam("productId") long productId) {
+    public void deleteProduct(@RequestParam("productId") long productId) {
         returnListProduct();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getProductId().equals(productId)) {
