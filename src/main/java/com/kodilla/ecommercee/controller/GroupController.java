@@ -49,8 +49,10 @@ public class GroupController {
     private List<GroupDto> groupDtos() {
         GroupDto groupDto1 = new GroupDto(1L, "groupNameTest1", products);
         GroupDto groupDto5 = new GroupDto(5L, "groupNameTest5", products);
-        groups.add(groupDto1);
-        groups.add(groupDto5);
+        if (groups.isEmpty()) {
+            groups.add(groupDto1);
+            groups.add(groupDto5);
+        }
         return groups;
     }
 }
