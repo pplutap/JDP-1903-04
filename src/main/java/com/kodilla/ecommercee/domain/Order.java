@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -19,8 +20,10 @@ public class Order {
     private Long id;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(name = "user")
-    List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(name = "product")
-    List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
+    @Column(name = "date")
+    private Date date;
 }
