@@ -5,25 +5,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "ORDER")
 public class Order {
     private Long orderId;
+    private Date date;
     private Long userId;
-    private List<Item> items = new ArrayList<>();
-    private double price = 0;
-    private boolean isPaid = false;
-    private boolean isVerified = false;
-    private boolean isSubmited = false;
+    private List<Item> items;
+    private Boolean isPaid;
 
-    public Order(Long orderId, Long userId, List<Item> items) {
-        this.orderId = orderId;
-        this.userId = userId;
-        this.items = items;
+    @OneToMany(
+            targetEntity = Item.class,
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public List<Item> getItems() {
+        return items;
     }
 }

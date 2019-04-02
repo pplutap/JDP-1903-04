@@ -5,14 +5,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "ITEM")
 public class Item {
+    private Long itemId;
+    private Order order;
     private Long productId;
-    private double quantity;
-    private BigDecimal productPrice;
+    private String productName;
+    private String productDescription;
+    private Double price;
+    private Double quantity;
 }
