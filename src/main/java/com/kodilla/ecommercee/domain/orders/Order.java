@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain.orders;
 
+import com.kodilla.ecommercee.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.List;
 public class Order {
     private Long orderId;
     private Date date;
-    private Long userId;
+    private User user;
     private List<Item> items;
     private Boolean paid;
 
