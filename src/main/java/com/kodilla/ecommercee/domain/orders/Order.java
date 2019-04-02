@@ -23,7 +23,7 @@ public class Order {
     private Date date;
     private Long userId;
     private List<Item> items;
-    private Boolean isPaid;
+    private Boolean paid;
 
     @OneToMany(
             targetEntity = Item.class,
