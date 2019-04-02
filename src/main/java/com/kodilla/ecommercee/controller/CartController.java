@@ -38,8 +38,8 @@ public class CartController {
     }
 
     @PostMapping(value = "createOrder", consumes = APPLICATION_JSON_VALUE)
-    public void createOrder(@RequestBody CartDto cartDto) {
-        Order newOrder = new Order(cartMapper.mapToCart(cartDto));
+    public void createOrder(@RequestBody CartDto cartDto, @RequestParam Long userId) {
+        Order newOrder = new Order(userId, cartMapper.mapToCart(cartDto));
     }
 
     @PostMapping(value = "addItemToCart", consumes = APPLICATION_JSON_VALUE)
