@@ -13,11 +13,13 @@ public class Cart {
 
     private Long cartId;
     private String cartName;
+    private Long userId;
     private List<Product> products = new ArrayList<>();
 
-    public Cart(Long cartId, String cartName) {
+    public Cart(Long cartId, String cartName, Long userId) {
         this.cartId = cartId;
         this.cartName = cartName;
+        this.userId = userId;
     }
 
 }
