@@ -1,23 +1,21 @@
-package com.kodilla.ecommercee.domain;
+package com.kodilla.ecommercee.domain.cart;
 
+import com.kodilla.ecommercee.domain.product.Product;
+import com.kodilla.ecommercee.domain.product.ProductDto;
+import com.kodilla.ecommercee.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
+@Setter
 public class CartDto {
-
     private Long cartId;
-    private String cartName;
     private List<ProductDto> products = new ArrayList<>();
-
-    public CartDto(Long cartId, String cartName, List<ProductDto> products) {
-        this.cartId = cartId;
-        this.cartName = cartName;
-        this.products = products;
-    }
 }

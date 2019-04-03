@@ -1,22 +1,17 @@
-package com.kodilla.ecommercee.domain.orders;
+package com.kodilla.ecommercee.domain.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "ITEM")
-public class Item {
+@AllArgsConstructor
+@NoArgsConstructor
+public class ItemDto {
     private Long itemId;
     private Order order;
     private Long productId;

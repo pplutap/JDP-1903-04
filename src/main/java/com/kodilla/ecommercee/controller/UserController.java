@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.UserDto;
+import com.kodilla.ecommercee.domain.user.Status;
+import com.kodilla.ecommercee.domain.user.UserDto;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserController {
     @PutMapping(value = "badUser")
     public UserDto badUser(@RequestBody Long id) {
         UserDto user = getUserForSpecificID(id);
-        user.setStatus(false);
+        user.setStatus(new Status(1L, "banned", new ArrayList<>()));
         return user;
     }
 
@@ -33,7 +34,7 @@ public class UserController {
 
     private UserDto getUserForSpecificID(Long id){
         for (UserDto user:users){
-            if (user.getId()==id){
+            if (user.getUserId()==id){
                 return user;
             }
         }

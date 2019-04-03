@@ -1,11 +1,14 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.orders.Item;
-import com.kodilla.ecommercee.domain.orders.OrderDto;
+import com.kodilla.ecommercee.domain.order.Item;
+import com.kodilla.ecommercee.domain.order.Order;
+import com.kodilla.ecommercee.domain.order.OrderDto;
+import com.kodilla.ecommercee.domain.user.User;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -63,19 +66,20 @@ public class OrderController {
     }
 
     private List<Item> getItems1(){
-        Item item1 = new Item(10125L,3,new BigDecimal("124.99"));
-        Item item2 = new Item(10126L,1,new BigDecimal("299"));
+        Item item1 = new Item(10125L,new Order(), 123L, "Test product name", "Test product desc", 43.12, 23.4);
+        Item item2 = new Item(10145L,new Order(), 123L, "Test product name", "Test product desc", 43.12, 23.4);
         return Arrays.asList(item1,item2);
     }
+
     private List<Item> getItems2(){
-        Item item2 = new Item(10126L,1,new BigDecimal("299"));
-        Item item3 = new Item(10127L,9,new BigDecimal("32.5"));
+        Item item2 = new Item(101654L,new Order(), 123L, "Test product name", "Test product desc", 43.12, 23.4);
+        Item item3 = new Item(101123L,new Order(), 123L, "Test product name", "Test product desc", 43.12, 23.4);
         return Arrays.asList(item2,item3);
     }
 
     private List<OrderDto> getOrderDtos(){
-        OrderDto order1 = new OrderDto(123L, getItems1());
-        OrderDto order2 = new OrderDto(124L, getItems2());
+        OrderDto order1 = new OrderDto(123L, new Date(), new User(), getItems1(), false);
+        OrderDto order2 = new OrderDto(324L, new Date(), new User(), getItems2(), false);
         orders.add(order1);
         orders.add(order2);
         return orders;
