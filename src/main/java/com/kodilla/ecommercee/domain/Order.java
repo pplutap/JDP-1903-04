@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,6 +17,7 @@ import java.util.List;
 @Setter
 public class Order {
     private Long orderId;
+    private Date date;
     private Long userId;
     private List<Product> products = new ArrayList<>();
     private boolean isPaid = false;
