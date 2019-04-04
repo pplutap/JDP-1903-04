@@ -10,7 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductDto {
-    private  Long productId;
-    private  String name;
-    private  String description;
+    private Long productId;
+    private String name;
+    private String description;
+    private GroupDto groupDto;
 }

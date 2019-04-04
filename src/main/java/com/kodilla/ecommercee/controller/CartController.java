@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.mapper.CartMapper;
+import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +22,18 @@ public class CartController {
     private CartMapper cartMapper;
     @Autowired
     private ProductMapper productMapper;
+    @Autowired
+    private GroupMapper groupMapper;
 
     @GetMapping(value = "getProductsFromCart")
     public List<ProductDto> getProductsFromCart(@RequestParam Long cartId)  {
-        Product jam = new Product(1L,"Jam","Strawberry jam");
+        Group food = new Group();
+        Product jam = new Product("Jam","Strawberry jam",food);
         Cart cart1 = new Cart(cartId, "DefaultUserCart", 15L);
         cart1.getProducts().add(jam);
         return cart1.getProducts().stream()
-                .map(product -> new ProductDto(product.getProductId(), product.getName(), product.getDescription()))
+                .map(product -> new ProductDto(product.getProductId(), product.getName(),
+                        product.getDescription(),groupMapper.mapToGroupDto(product.getGroup())))
                 .collect(Collectors.toList());
     }
 
@@ -50,8 +55,9 @@ public class CartController {
 
     @DeleteMapping(value = "deleteProductFromCart")
     public void deleteProductFromCart(@RequestParam Long productId, Long cartId) {
+        Group food = new Group();
         Cart newCart = new Cart(cartId,"testCart", 15L);
-        Product laptop = new Product(productId,"Notebook","15 inch");
+        Product laptop = new Product("Notebook","15 inch",food);
         newCart.getProducts().add(laptop);
         newCart.getProducts().remove(laptop); //W prawdziwej implementacji ustawienie pola boolean "isDeleted" produktu na true
     }
