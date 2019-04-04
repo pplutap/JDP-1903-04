@@ -5,6 +5,7 @@ import com.kodilla.ecommercee.domain.product.Product;
 import com.kodilla.ecommercee.domain.product.ProductDto;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -58,8 +59,8 @@ public class ProductController {
     }
 
     private List<ProductDto> returnListProduct() {
-        ProductDto computer = new ProductDto(1L, "computer", "Test desc", 34.3, new Group(), false, new ArrayList<>());
-        ProductDto laptop = new ProductDto(1L, "laptop", "Test desc", 34.3, new Group(), false, new ArrayList<>());
+        ProductDto computer = new ProductDto(1L, "computer", "Test desc", 34.3, new Group(), false, Collections.emptyList());
+        ProductDto laptop = new ProductDto(1L, "laptop", "Test desc", 34.3, new Group(), false, Collections.emptyList());
         if (products.isEmpty()) {
             products.add(computer);
             products.add(laptop);

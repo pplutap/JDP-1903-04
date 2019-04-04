@@ -14,7 +14,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
 @Entity
 @Table(name = "ORDER")
@@ -27,7 +26,6 @@ public class Order {
 
     @Id
     @GeneratedValue
-    @NotNull
     @Column(name = "ORDER_ID", unique = true)
     public Long getOrderId() {
         return orderId;

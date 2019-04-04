@@ -11,7 +11,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +23,6 @@ public class Group {
 
     @Id
     @GeneratedValue
-    @NotNull
     @Column(name = "GROUP_ID", unique = true)
     public Long getGroupId() {
         return groupId;

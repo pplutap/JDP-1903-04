@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +28,6 @@ public class Product {
 
     @Id
     @GeneratedValue
-    @NotNull
     @Column(name = "PRODUCT_ID", unique = true)
     public Long getProductId() {
         return productId;

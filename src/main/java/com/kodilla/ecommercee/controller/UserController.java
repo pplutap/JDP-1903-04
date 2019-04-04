@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.user.Status;
 import com.kodilla.ecommercee.domain.user.UserDto;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -21,7 +22,7 @@ public class UserController {
     @PutMapping(value = "badUser")
     public UserDto badUser(@RequestBody Long id) {
         UserDto user = getUserForSpecificID(id);
-        user.setStatus(new Status(1L, "banned", new ArrayList<>()));
+        user.setStatus(new Status(1L, "banned", Collections.emptyList()));
         return user;
     }
 

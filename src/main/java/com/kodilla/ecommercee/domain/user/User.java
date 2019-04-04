@@ -15,7 +15,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
 @Entity
 @Table(name = "USER")
@@ -29,7 +28,6 @@ public class User {
 
     @Id
     @GeneratedValue
-    @NotNull
     @Column(name = "USER_ID", unique = true)
     public Long getUserId() {
         return userId;

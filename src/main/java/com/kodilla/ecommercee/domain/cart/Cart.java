@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
 @Entity
 @Table(name = "CART")
@@ -24,7 +23,6 @@ public class Cart {
 
     @Id
     @GeneratedValue
-    @NotNull
     @Column(name = "CART_ID", unique = true)
     public Long getCartId() {
         return cartId;

@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
 @Entity
 @Table(name = "ITEM")
@@ -25,7 +24,6 @@ public class Item {
 
     @Id
     @GeneratedValue
-    @NotNull
     @Column(name = "ITEM_ID", unique = true)
     public Long getItemId() {
         return itemId;
