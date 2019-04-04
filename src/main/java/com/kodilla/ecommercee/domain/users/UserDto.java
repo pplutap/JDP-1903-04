@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee.domain;
+package com.kodilla.ecommercee.domain.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +12,5 @@ import lombok.Setter;
 public class UserDto {
     private Long id;
     private String username;
-    private boolean status;
-    private Long userKey;
+    private boolean blocked;
 }

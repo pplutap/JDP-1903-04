@@ -1,5 +1,6 @@
-package com.kodilla.ecommercee.domain.orders;
+package com.kodilla.ecommercee.domain.carts;
 
+import com.kodilla.ecommercee.domain.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,20 +8,19 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
+import java.util.List;
+import java.util.ArrayList;
 
-@Entity
-@Table(name = "ITEMS")
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Entity(name = "cart")
 @Setter
-public class Item {
+@Getter
+public class Cart {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private double quantity;
-    private BigDecimal productPrice;
+    @Column(name = "id")
+    private Long cartId;
+
+
 }
