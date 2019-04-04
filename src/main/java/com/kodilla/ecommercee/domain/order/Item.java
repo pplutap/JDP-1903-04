@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Setter
 @Entity
-@Table(name = "ITEM")
+@Table(name = "item")
 public class Item {
     private Long itemId;
     private Order order;

@@ -17,12 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 public class User {
     private Long userId;
     private String userName;
     private Long userKey;
     private Cart cart;
+    private Status status;
     private List<Order> orders = new ArrayList<>();
 
     @Id
@@ -58,5 +59,10 @@ public class User {
     )
     public List<Order> getOrders() {
         return orders;
+    }
+
+    enum Status{
+        BANNED,
+        NOTBANNED
     }
 }

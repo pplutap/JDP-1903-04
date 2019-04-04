@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GROUP")
+@Table(name = "group")
 public class Group {
     private Long groupId;
     private String groupName;

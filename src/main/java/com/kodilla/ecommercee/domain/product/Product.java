@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "product")
 public class Product {
     private Long productId;
     private String name;

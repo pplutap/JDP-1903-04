@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Setter
 @Entity
-@Table(name = "CART")
+@Table(name = "cart")
 public class Cart {
     private Long cartId;
     private List<Product> products = new ArrayList<>();

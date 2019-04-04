@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Entity
-@Table(name = "ORDER")
+@Table(name = "order")
 public class Order {
     private Long orderId;
     private Date date;
