@@ -21,7 +21,6 @@ import java.util.List;
 public class User {
     private Long userId;
     private String userName;
-    private Status status;
     private Long userKey;
     private Cart cart;
     private List<Order> orders = new ArrayList<>();
@@ -37,12 +36,6 @@ public class User {
     @Column(name = "USER_NAME")
     public String getUserName() {
         return userName;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "STATUS_ID")
-    public Status getStatus() {
-        return status;
     }
 
     @NotNull

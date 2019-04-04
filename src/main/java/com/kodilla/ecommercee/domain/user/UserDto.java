@@ -16,7 +16,6 @@ import java.util.List;
 public class UserDto {
     private Long userId;
     private String userName;
-    private Status status;
     private Long userKey;
     private Cart cart;
     private List<Order> orders;
