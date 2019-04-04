@@ -10,15 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@Getter
 @Setter
+@Getter
 @Entity(name = "product")
 public class Product {
-
-    public Product(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,4 +28,9 @@ public class Product {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
+
+    public Product(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

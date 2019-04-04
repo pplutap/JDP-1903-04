@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DbCartService {
+    private CartRepository cartRepository;
+
     @Autowired
-    CartRepository cartRepository;
+    public DbCartService(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
 
     public Cart saveCart(Cart cart) {
         return cartRepository.save(cart);

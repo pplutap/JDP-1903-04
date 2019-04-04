@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface CartRepository extends CrudRepository<Cart, Long > {
+public interface CartRepository extends CrudRepository<Cart, Long> {
     @Override
     Cart save(Cart cart);
 
