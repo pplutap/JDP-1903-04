@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.mapper;
 
-import com.kodilla.ecommercee.domain.Product;
-import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.products.Product;
+import com.kodilla.ecommercee.domain.products.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;

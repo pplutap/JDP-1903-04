@@ -1,6 +1,8 @@
-package com.kodilla.ecommercee.domain;
+package com.kodilla.ecommercee.domain.products;
 
 
+import com.kodilla.ecommercee.domain.carts.Cart;
+import com.kodilla.ecommercee.domain.groups.Group;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,8 +16,6 @@ import java.util.List;
 @Setter
 @Entity(name = "product")
 public class Product {
-
-
 
     public Product(String name, String description, Group group) {
         this.name = name;

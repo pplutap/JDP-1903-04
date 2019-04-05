@@ -1,5 +1,6 @@
-package com.kodilla.ecommercee.domain;
+package com.kodilla.ecommercee.domain.groups;
 
+import com.kodilla.ecommercee.domain.products.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import java.util.List;
 public class Group {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private Long groupId;
 
@@ -28,8 +29,7 @@ public class Group {
             fetch=FetchType.LAZY  )
     private List<Product> productsInGroup = new ArrayList<>();
 
-    public Group(Long groupId, String groupName, List<Product> productsInGroup) {
-        this.groupId = groupId;
+    public Group(String groupName, List<Product> productsInGroup) {
         this.groupName = groupName;
         this.productsInGroup = productsInGroup;
     }

@@ -12,6 +12,8 @@ import com.kodilla.ecommercee.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +34,8 @@ public class CartController {
     public List<ProductDto> getProductsFromCart(@RequestParam Long cartId)  {
         Group food = new Group();
         Product jam = new Product("Jam","Strawberry jam",food);
-        Cart cart1 = new Cart(cartId, "DefaultUserCart", 15L);
+        List<Product> list = Arrays.asList(jam);
+        Cart cart1 = new Cart("DefaultUserCart", 15L,list);
         cart1.getProducts().add(jam);
         return cart1.getProducts().stream()
                 .map(product -> new ProductDto(product.getProductId(), product.getName(),
@@ -52,14 +55,19 @@ public class CartController {
 
     @PostMapping(value = "addItemToCart", consumes = APPLICATION_JSON_VALUE)
     public void addItemToCart(@RequestBody ProductDto productDto, CartDto cartDto) {
-        Cart newCart = new Cart(cartDto.getCartId(), "UserCart", cartDto.getUserId());
+        Group food = new Group();
+        Product jam = new Product("Jam","Strawberry jam",food);
+        List<Product> list = Arrays.asList(jam);
+        Cart newCart = new Cart("UserCart", cartDto.getUserId(),list);
         newCart.getProducts().add(productMapper.mapToProduct(productDto));
     }
 
     @DeleteMapping(value = "deleteProductFromCart")
     public void deleteProductFromCart(@RequestParam Long productId, Long cartId) {
         Group food = new Group();
-        Cart newCart = new Cart(cartId,"testCart", 15L);
+        Product jam = new Product("Jam","Strawberry jam",food);
+        List<Product> list = Arrays.asList(jam);
+        Cart newCart = new Cart("testCart", 15L,list);
         Product laptop = new Product("Notebook","15 inch",food);
         newCart.getProducts().add(laptop);
         newCart.getProducts().remove(laptop); //W prawdziwej implementacji ustawienie pola boolean "isDeleted" produktu na true

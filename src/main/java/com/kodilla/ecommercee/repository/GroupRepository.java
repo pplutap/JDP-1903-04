@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.repository;
 
-import com.kodilla.ecommercee.domain.Group;
+import com.kodilla.ecommercee.domain.groups.Group;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +15,5 @@ public interface GroupRepository extends CrudRepository<Group, Long> {
     @Override
     Group save(Group group);
 
-    Optional<Group> getGroupById(Long id);
+    Group getGroupByGroupId(Long groupId);
 }
