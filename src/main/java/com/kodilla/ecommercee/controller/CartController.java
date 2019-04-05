@@ -1,15 +1,18 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.domain.carts.Cart;
+import com.kodilla.ecommercee.domain.carts.CartDto;
+import com.kodilla.ecommercee.domain.groups.Group;
+import com.kodilla.ecommercee.domain.orders.Order;
+import com.kodilla.ecommercee.domain.products.Product;
+import com.kodilla.ecommercee.domain.products.ProductDto;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.smartcardio.Card;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
