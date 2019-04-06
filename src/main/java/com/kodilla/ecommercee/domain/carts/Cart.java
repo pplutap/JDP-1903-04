@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain.carts;
 
 import com.kodilla.ecommercee.domain.products.Product;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

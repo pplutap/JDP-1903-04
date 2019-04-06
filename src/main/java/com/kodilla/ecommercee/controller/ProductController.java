@@ -58,7 +58,6 @@ public class ProductController {
     }
 
     private List<ProductDto> returnListProduct() {
-
         ProductDto computer = new ProductDto(1L, "computer", "computer_desc", new BigDecimal(250),
                 false);
         ProductDto laptop = new ProductDto(2L, "laptop", "laptop_desc", new BigDecimal(150),

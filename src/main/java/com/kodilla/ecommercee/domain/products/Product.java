@@ -46,5 +46,4 @@ public class Product {
         this.price = price;
         this.deleted = deleted;
     }
-
 }

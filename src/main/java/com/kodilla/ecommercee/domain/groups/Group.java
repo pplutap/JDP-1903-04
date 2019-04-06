@@ -28,10 +28,10 @@ public class Group {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Product> products = new ArrayList<>();
+    private List<Product> productsInGroup = new ArrayList<>();
 
-    public Group(String name, List<Product> products) {
+    public Group(String name, List<Product> productsInGroup) {
         this.name = name;
-        this.products = products;
+        this.productsInGroup = productsInGroup;
     }
 }
