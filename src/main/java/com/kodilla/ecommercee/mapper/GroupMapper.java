@@ -7,15 +7,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GroupMapper {
+    private ProductMapper productMapper;
 
     @Autowired
-    ProductMapper productMapper;
+    public GroupMapper(ProductMapper productMapper) {
+        this.productMapper = productMapper;
+    }
 
     public Group mapToGroup(final GroupDto groupDto){
         return new Group(groupDto.getGroupName(),productMapper.mapToProductList(groupDto.getProductsInGroup()));
     }
 
     public GroupDto mapToGroupDto(final Group group){
-        return new GroupDto(group.getGroupId(),group.getGroupName(),productMapper.mapToProductDtoList(group.getProductsInGroup()));
+        return new GroupDto(group.getGroupId(),group.getName(),productMapper.mapToProductDtoList(group.getProductsInGroup()));
     }
 }

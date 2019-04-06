@@ -1,8 +1,9 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.groups.GroupDto;
 import com.kodilla.ecommercee.domain.products.ProductDto;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,9 +58,10 @@ public class ProductController {
     }
 
     private List<ProductDto> returnListProduct() {
-        GroupDto electronic = new GroupDto();
-        ProductDto computer = new ProductDto(1L, "computer", "test",electronic);
-        ProductDto laptop = new ProductDto(2L, "laptop", "test",electronic);
+        ProductDto computer = new ProductDto(1L, "computer", "computer_desc", new BigDecimal(250),
+                false);
+        ProductDto laptop = new ProductDto(2L, "laptop", "laptop_desc", new BigDecimal(150),
+                false);
         if (products.isEmpty()) {
             products.add(computer);
             products.add(laptop);

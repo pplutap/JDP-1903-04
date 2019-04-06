@@ -22,24 +22,23 @@ public class UserController {
     @PutMapping(value = "badUser")
     public UserDto badUser(@RequestBody Long id) {
         UserDto user = getUserForSpecificID(id);
-        user.setStatus(false);
+        user.setBlocked(false);
         return user;
     }
 
     @GetMapping(value = "getToken", consumes = APPLICATION_JSON_VALUE)
-    public Long getToken(@RequestBody Long userId){
+    public Long getToken(@RequestBody Long userId) {
         Random random = new Random();
         Long randomLong = random.nextLong();
         return randomLong;
     }
 
-    private UserDto getUserForSpecificID(Long id){
-        for (UserDto user:users){
-            if (user.getId()==id){
+    private UserDto getUserForSpecificID(Long id) {
+        for (UserDto user : users) {
+            if (user.getId() == id) {
                 return user;
             }
         }
         return null;
     }
-
 }
