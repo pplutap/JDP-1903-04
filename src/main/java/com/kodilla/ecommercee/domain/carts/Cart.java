@@ -22,9 +22,6 @@ public class Cart {
     @Column(name = "id")
     private Long cartId;
 
-    @Column
-    private String name;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "join_cart_product",

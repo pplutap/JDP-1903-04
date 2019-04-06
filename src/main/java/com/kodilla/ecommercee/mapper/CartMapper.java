@@ -9,27 +9,30 @@ import java.util.stream.Collectors;
 
 @Component
 public class CartMapper {
+    private ProductMapper productMapper;
 
     @Autowired
-    ProductMapper productMapper;
+    public CartMapper(ProductMapper productMapper) {
+        this.productMapper = productMapper;
+    }
 
     public Cart mapToCart(final CartDto cartDto) {
-        return new Cart(cartDto.getCartId(), cartDto.getCartName(), productMapper.mapToProductList(cartDto.getProducts()));
+        return new Cart(cartDto.getCartId(), productMapper.mapToProductList(cartDto.getProducts()));
     }
 
     public CartDto mapToCartDto(final Cart cart) {
-        return new CartDto(cart.getCartId(), cart.getName(), productMapper.mapToProductDtoList(cart.getProducts()));
+        return new CartDto(cart.getCartId(), productMapper.mapToProductDtoList(cart.getProducts()));
     }
 
     public List<CartDto> mapToCartDtoList(final List<Cart> carts) {
         return carts.stream()
-                .map(cart -> new CartDto(cart.getCartId(), cart.getName() ,productMapper.mapToProductDtoList(cart.getProducts())))
+                .map(cart -> new CartDto(cart.getCartId(),productMapper.mapToProductDtoList(cart.getProducts())))
                 .collect(Collectors.toList());
     }
 
     public List<Cart> mapToCartList(final List<CartDto> cartDtoList) {
         return cartDtoList.stream()
-                .map(cartDto -> new Cart(cartDto.getCartId(), cartDto.getCartName(), productMapper.mapToProductList(cartDto.getProducts())))
+                .map(cartDto -> new Cart(cartDto.getCartId(), productMapper.mapToProductList(cartDto.getProducts())))
                 .collect(Collectors.toList());
     }
 }

@@ -31,20 +31,20 @@ public class Product {
     private BigDecimal price;
 
     @Column(name = "isDeleted")
-    private boolean isDeleted;
+    private boolean deleted;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group groupId;
+    private Group group;
 
-    public Product(String name, String description, BigDecimal price, boolean isDeleted) {
+    public Product(String name, String description, BigDecimal price, boolean deleted) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.isDeleted = isDeleted;
+        this.deleted = deleted;
     }
 
 }
