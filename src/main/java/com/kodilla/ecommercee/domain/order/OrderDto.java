@@ -1,12 +1,12 @@
-package com.kodilla.ecommercee.domain.orders;
+package com.kodilla.ecommercee.domain.order;
 
-import com.kodilla.ecommercee.domain.products.ProductDto;
+import com.kodilla.ecommercee.domain.users.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,6 +15,8 @@ import java.util.List;
 @Setter
 public class OrderDto {
     private Long orderId;
-    private Long userId;
-    private List<ProductDto> productDtos = new ArrayList<>();
+    private Date date;
+    private User user;
+    private List<ItemDto> items;
+    private Boolean paid;
 }

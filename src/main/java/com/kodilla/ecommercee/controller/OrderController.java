@@ -1,10 +1,14 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.products.ProductDto;
-import com.kodilla.ecommercee.domain.orders.OrderDto;
+import com.kodilla.ecommercee.domain.carts.Cart;
+import com.kodilla.ecommercee.domain.order.ItemDto;
+import com.kodilla.ecommercee.domain.order.OrderDto;
+import com.kodilla.ecommercee.domain.users.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -16,7 +20,7 @@ public class OrderController {
     //aktualizacja zamówienia ok
     //usunięcie zamówienia ok
 
-    List<OrderDto> orders = new ArrayList<>();
+    List<OrderDto> orders = Collections.emptyList();
 
     @GetMapping("/getOrders")
     private List<OrderDto> getOrders() {
@@ -42,10 +46,10 @@ public class OrderController {
     @PutMapping("/updateOrder")
     private OrderDto updateOrder(@RequestBody OrderDto orderDto){
         Long orderToUpdateId = orderDto.getOrderId();
-        List<ProductDto> updatedProducts = orderDto.getProductDtos();
+        List<ItemDto> updatedProducts = orderDto.getItems();
         for (OrderDto theOrderDto:orders){
             if(orderDto.getOrderId().equals(orderToUpdateId)){
-                theOrderDto.setProductDtos(updatedProducts);
+                theOrderDto.setItems(updatedProducts);
             }
         }
         return orderDto;
@@ -62,10 +66,11 @@ public class OrderController {
     }
 
     private List<OrderDto> getOrderDtos(){
-        List<ProductDto> productDtos1 = new ArrayList<>();
-        List<ProductDto> productDtos2 = new ArrayList<>();
-        OrderDto orderDto1 = new OrderDto(123L,19L,productDtos1);
-        OrderDto orderDto2 = new OrderDto(124L,20L,productDtos2);
+        User user = new User(1L, "TestName", 11232L, new Cart(), User.Status.NOT_BANNED, Collections.emptyList());
+        List<ItemDto> productDtos1 = new ArrayList<>();
+        List<ItemDto> productDtos2 = new ArrayList<>();
+        OrderDto orderDto1 = new OrderDto(123L, new Date(), user,productDtos1, true);
+        OrderDto orderDto2 = new OrderDto(123L, new Date(), user,productDtos2, false);
         orders.add(orderDto1);
         orders.add(orderDto2);
         return orders;

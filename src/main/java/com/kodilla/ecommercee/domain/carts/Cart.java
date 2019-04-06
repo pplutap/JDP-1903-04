@@ -19,7 +19,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long cartId;
+    private Long id;
 
     @Column(name = "cart_name")
     private String cartName;
@@ -40,5 +40,4 @@ public class Cart {
         this.userId = userId;
         this.products = products;
     }
-
 }

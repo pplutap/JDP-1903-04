@@ -1,7 +1,8 @@
 package com.kodilla.ecommercee.mapper;
 
+import com.kodilla.ecommercee.domain.order.ItemDto;
+import com.kodilla.ecommercee.domain.order.OrderDto;
 import com.kodilla.ecommercee.domain.products.Product;
-import com.kodilla.ecommercee.domain.products.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -13,23 +14,17 @@ public class ProductMapper {
     @Autowired
     GroupMapper groupMapper;
 
-    public Product mapToProduct(final ProductDto productDto) {
-        return new Product(productDto.getName(), productDto.getDescription(),groupMapper.mapToGroup(productDto.getGroupDto()));
+    public Product mapToProduct(final ItemDto productDto) {
+        return new Product();
     }
 
-    public List<ProductDto> mapToProductDtoList(final List<Product> products) {
+    public List<ItemDto> mapToProductDtoList(final List<Product> products) {
         return products.stream()
-                .map(product -> new ProductDto(product.getProductId(), product.getName(),
-                        product.getDescription(),groupMapper.mapToGroupDto(product.getGroup())))
-                .collect(Collectors.toList());
+                .map(product -> new ItemDto(1L, new OrderDto(), product.getId(), product.getName(), product.getDescription(), 1.0, 1.0)).collect(Collectors.toList());
     }
 
-    public List<Product> mapToProductList(final List<ProductDto> productDtoList) {
+    public List<Product> mapToProductList(final List<ItemDto> productDtoList) {
         return productDtoList.stream()
-                .map(productDto -> new Product(
-                        productDto.getName(),
-                        productDto.getDescription(),
-                        groupMapper.mapToGroup(productDto.getGroupDto())))
-                .collect(Collectors.toList());
+                .map(productDto -> new Product()).collect(Collectors.toList());
     }
 }

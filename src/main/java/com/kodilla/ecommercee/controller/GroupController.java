@@ -1,17 +1,17 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.groups.GroupDto;
-import com.kodilla.ecommercee.domain.products.ProductDto;
+import com.kodilla.ecommercee.domain.order.ItemDto;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/group")
 public class GroupController {
-    private List<GroupDto> groups = new ArrayList<>();
-    private List<ProductDto> products = new ArrayList<>();
+    private List<GroupDto> groups = Collections.emptyList();
+    private List<ItemDto> products = Collections.emptyList();
 
     @GetMapping(value = "getGroups")
     public List<GroupDto> getGroups() {

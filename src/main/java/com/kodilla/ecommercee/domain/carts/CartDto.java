@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.domain.carts;
 
-import com.kodilla.ecommercee.domain.products.ProductDto;
+import com.kodilla.ecommercee.domain.order.ItemDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,12 +14,12 @@ public class CartDto {
     private Long cartId;
     private String cartName;
     private Long userId;
-    private List<ProductDto> products = new ArrayList<>();
+    private List<ItemDto> items = new ArrayList<>();
 
-    public CartDto(Long cartId, String cartName, Long userId, List<ProductDto> products) {
+    public CartDto(Long cartId, String cartName, Long userId, List<ItemDto> items) {
         this.cartId = cartId;
         this.cartName = cartName;
         this.userId = userId;
-        this.products = products;
+        this.items = items;
     }
 }
