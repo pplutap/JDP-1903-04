@@ -13,63 +13,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "product")
 public class Product {
-    private Long productId;
-    private String name;
-    private String description;
-    private Double price;
-    private Group group;
-    private Boolean deleted;
-    private List<Cart> carts = new ArrayList<>();
-
     @Id
     @GeneratedValue
-    @Column(name = "PRODUCT_ID", unique = true)
-    public Long getProductId() {
-        return productId;
-    }
-
+    @Column(name = "product_id", unique = true)
+    private Long id;
     @NotNull
-    @Column(name = "NAME")
-    public String getName() {
-        return name;
-    }
-
-    @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
-    }
-
+    @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
     @NotNull
-    @Column(name = "PRICE")
-    public Double getPrice() {
-        return price;
-    }
-
+    @Column(name = "price")
+    private Double price;
     @ManyToOne
-    @JoinColumn(name = "GROUP_ID")
-    public Group getGroup() {
-        return group;
-    }
-
+    @JoinColumn(name = "group_id")
+    private Group group;
     @NotNull
-    @Column(name = "DELETED")
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "JOIN_PRODUCT_CART",
-            joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
+            name = "join_product_cart",
+            joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
+            inverseJoinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "cart_id")}
     )
-    public List<Cart> getCarts() {
-        return carts;
-    }
+    private List<Cart> carts = new ArrayList<>();
 }

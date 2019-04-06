@@ -27,7 +27,7 @@ public class GroupController {
     public GroupDto getGroup(@RequestParam Long groupId) {
         groupDtos();
         for (GroupDto group : groups) {
-            if (group.getGroupId().equals(groupId)) {
+            if (group.getId().equals(groupId)) {
                 return group;
             }
         }
@@ -36,9 +36,9 @@ public class GroupController {
 
     @PutMapping(value = "updateGroup")
     public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
-        Long groupId = groupDto.getGroupId();
+        Long groupId = groupDto.getId();
         for (GroupDto group : groups) {
-            if (group.getGroupId().equals(groupId)) {
+            if (group.getId().equals(groupId)) {
                 group.setGroupName(groupDto.getGroupName());
                 group.setProductsInGroup(groupDto.getProductsInGroup());
             }

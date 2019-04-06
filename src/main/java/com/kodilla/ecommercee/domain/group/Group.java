@@ -11,36 +11,25 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "group")
 public class Group {
-    private Long groupId;
-    private String groupName;
-    private List<Product> products;
-
     @Id
     @GeneratedValue
-    @Column(name = "GROUP_ID", unique = true)
-    public Long getGroupId() {
-        return groupId;
-    }
-
+    @Column(name = "group_id", unique = true)
+    private Long groupId;
     @NotNull
-    @Column(name = "GROUP_NAME")
-    public String getGroupName() {
-        return groupName;
-    }
-
+    @Column(name = "group_name")
+    private String groupName;
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Product> getProducts() {
-        return products;
-    }
+    private List<Product> products;
 }

@@ -21,7 +21,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "getProduct")
-    public ProductDto getProduct(@RequestParam("productId") long productId) {
+    public ProductDto getProduct(@RequestParam("id") long productId) {
         returnListProduct();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getProductId().equals(productId)) {
@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "deleteProduct")
-    public void deleteProduct(@RequestParam("productId") long productId) {
+    public void deleteProduct(@RequestParam("Id") long productId) {
         returnListProduct();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getProductId().equals(productId)) {

@@ -14,22 +14,15 @@ import java.util.ArrayList;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Setter
 @Entity
 @Table(name = "cart")
 public class Cart {
-    private Long cartId;
-    private List<Product> products = new ArrayList<>();
-
     @Id
     @GeneratedValue
-    @Column(name = "CART_ID", unique = true)
-    public Long getCartId() {
-        return cartId;
-    }
-
+    @Column(name = "cart_id", unique = true)
+    private Long id;
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
-    public List<Product> getProducts() {
-        return products;
-    }
+    private List<Product> products = new ArrayList<>();
 }

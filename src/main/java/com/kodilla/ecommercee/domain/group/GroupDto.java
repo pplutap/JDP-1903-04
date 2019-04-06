@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class GroupDto {
-    private Long groupId;
+    private Long id;
     private String groupName;
     private List<ProductDto> productsInGroup = new ArrayList<>();
 }

@@ -20,28 +20,28 @@ public class CartMapper {
     ItemMapper itemMapper;
 
     public Cart mapToCart(final CartDto cartDto) {
-        return new Cart(cartDto.getCartId(), productMapper.mapToProductList(cartDto.getProducts()));
+        return new Cart(cartDto.getId(), productMapper.mapToProductList(cartDto.getProducts()));
     }
 
     public CartDto mapToCartDto(final Cart cart) {
-        return new CartDto(cart.getCartId(),productMapper.mapToProductDtoList(cart.getProducts()));
+        return new CartDto(cart.getId(),productMapper.mapToProductDtoList(cart.getProducts()));
     }
 
     public List<CartDto> mapToCartDtoList(final List<Cart> carts) {
         return carts.stream()
-                .map(cart -> new CartDto(cart.getCartId(),productMapper.mapToProductDtoList(cart.getProducts())))
+                .map(cart -> new CartDto(cart.getId(),productMapper.mapToProductDtoList(cart.getProducts())))
                 .collect(Collectors.toList());
     }
 
     public List<Cart> mapToCartList(final List<CartDto> cartDtoList) {
         return cartDtoList.stream()
-                .map(cartDto -> new Cart(cartDto.getCartId(), productMapper.mapToProductList(cartDto.getProducts())))
+                .map(cartDto -> new Cart(cartDto.getId(), productMapper.mapToProductList(cartDto.getProducts())))
                 .collect(Collectors.toList());
     }
 
     public Order mapToOrder(CartDto cartDto) {
         Order order = new Order();
-        order.setOrderId(1L);
+        order.setId(1L);
         order.setDate(new Date());
         order.setItems(itemMapper.productDtoListToItemList(cartDto.getProducts()));
         order.setPaid(false);

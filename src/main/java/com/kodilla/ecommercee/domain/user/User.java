@@ -18,47 +18,29 @@ import java.util.List;
 @Setter
 @Entity(name = "\"order\"")
 public class User {
-    private Long userId;
-    private String userName;
-    private Long userKey;
-    private Cart cart;
-    private Status status;
-    private List<Order> orders = new ArrayList<>();
-
     @Id
     @GeneratedValue
-    @Column(name = "USER_ID", unique = true)
-    public Long getUserId() {
-        return userId;
-    }
-
+    @Column(name = "user_id", unique = true)
+    private Long id;
     @NotNull
-    @Column(name = "USER_NAME")
-    public String getUserName() {
-        return userName;
-    }
-
+    @Column(name = "user_name")
+    private String userName;
     @NotNull
-    @Column(name = "USER_KEY")
-    public Long getUserKey() {
-        return userKey;
-    }
-
+    @Column(name = "user_key")
+    private Long userKey;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CART_ID")
-    public Cart getCart() {
-        return cart;
-    }
-
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+    @Column(name = "status")
+    private Status status;
     @OneToMany(
             targetEntity = Order.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Order> getOrders() {
-        return orders;
-    }
+    private List<Order> orders = new ArrayList<>();
+
 
     enum Status{
         BANNED,

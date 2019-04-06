@@ -15,12 +15,12 @@ public class ProductMapper {
 
     //Do zrobienia GroupMapper
     public ProductDto mapToProductDto(final Product product){
-        return new ProductDto(product.getProductId(), product.getName(), product.getDescription(), product.getPrice(), product.getGroup(), product.getDeleted(), product.getCarts());
+        return new ProductDto(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getGroup(), product.getIsDeleted(), product.getCarts());
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
         return products.stream()
-                .map(product -> new ProductDto(product.getProductId(), product.getName(), product.getDescription(), product.getPrice(), product.getGroup(), product.getDeleted(), product.getCarts()))
+                .map(product -> new ProductDto(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getGroup(), product.getIsDeleted(), product.getCarts()))
                 .collect(Collectors.toList());
     }
 

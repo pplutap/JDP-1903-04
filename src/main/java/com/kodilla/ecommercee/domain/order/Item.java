@@ -14,55 +14,26 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "item")
 public class Item {
-    private Long itemId;
-    private Order order;
-    private Long productId;
-    private String productName;
-    private String productDescription;
-    private Double price;
-    private Double quantity;
-
     @Id
     @GeneratedValue
-    @Column(name = "ITEM_ID", unique = true)
-    public Long getItemId() {
-        return itemId;
-    }
-
+    @Column(name = "item_id", unique = true)
+    private Long id;
     @ManyToOne
-    @JoinColumn(name = "ORDER_ID")
-    public Order getOrder() {
-        return order;
-    }
-
+    @JoinColumn(name = "order_id")
+    private Order order;
     @NotNull
-    @Column(name = "PRODUCT_ID")
-    public Long getProductId() {
-        return productId;
-    }
-
+    @Column(name = "product_id")
+    private Long productId;
     @NotNull
-    @Column(name = "PRODUCT_NAME")
-    public String getProductName() {
-        return productName;
-    }
-
+    @Column(name = "product_name")
+    private String productName;
     @NotNull
-    @Column(name = "PRODUCT_DESCRIPTION")
-    public String getProductDescription() {
-        return productDescription;
-    }
-
+    @Column(name = "product_description")
+    private String productDescription;
     @NotNull
-    @Column(name = "PRICE")
-    public Double getPrice() {
-        return price;
-    }
-
+    @Column(name = "price")
+    private Double price;
     @NotNull
-    @Column(name = "QUANTITY")
-    public Double getQuantity() {
-        return quantity;
-    }
-
+    @Column(name = "quantity")
+    private Double quantity;
 }

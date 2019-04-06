@@ -15,47 +15,29 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
+@Getter
 @Entity
 @Table(name = "order")
 public class Order {
-    private Long orderId;
-    private Date date;
-    private User user;
-    private List<Item> items = new ArrayList<>();
-    private Boolean paid;
-
     @Id
     @GeneratedValue
-    @Column(name = "ORDER_ID", unique = true)
-    public Long getOrderId() {
-        return orderId;
-    }
-
+    @Column(name = "order_id", unique = true)
+    private Long id;
     @NotNull
-    @Column(name = "DATE")
-    public Date getDate() {
-        return date;
-    }
-
+    @Column(name = "date")
+    private Date date;
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    public User getUser() {
-        return user;
-    }
-
-    @NotNull
-    @Column(name = "PAID")
-    public Boolean getPaid() {
-        return paid;
-    }
-
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToMany(
             targetEntity = Item.class,
             mappedBy = "order",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Item> getItems() {
-        return items;
-    }
+    private List<Item> items = new ArrayList<>();
+    @NotNull
+    @Column(name = "paid")
+    private Boolean paid;
+
 }
