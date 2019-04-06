@@ -35,7 +35,7 @@ public class CartController {
         Group food = new Group();
         Product jam = new Product("Jam","Strawberry jam",food);
         List<Product> list = Arrays.asList(jam);
-        Cart cart1 = new Cart("DefaultUserCart", 15L,list);
+        Cart cart1 = new Cart(15L,list);
         cart1.getProducts().add(jam);
         return cart1.getProducts().stream()
                 .map(product -> new ProductDto(product.getProductId(), product.getName(),
@@ -58,7 +58,7 @@ public class CartController {
         Group food = new Group();
         Product jam = new Product("Jam","Strawberry jam",food);
         List<Product> list = Arrays.asList(jam);
-        Cart newCart = new Cart("UserCart", cartDto.getUserId(),list);
+        Cart newCart = new Cart(cartDto.getUserId(),list);
         newCart.getProducts().add(productMapper.mapToProduct(productDto));
     }
 
@@ -67,7 +67,7 @@ public class CartController {
         Group food = new Group();
         Product jam = new Product("Jam","Strawberry jam",food);
         List<Product> list = Arrays.asList(jam);
-        Cart newCart = new Cart("testCart", 15L,list);
+        Cart newCart = new Cart(15L,list);
         Product laptop = new Product("Notebook","15 inch",food);
         newCart.getProducts().add(laptop);
         newCart.getProducts().remove(laptop); //W prawdziwej implementacji ustawienie pola boolean "isDeleted" produktu na true

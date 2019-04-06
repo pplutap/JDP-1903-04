@@ -21,9 +21,6 @@ public class Cart {
     @Column(name = "id")
     private Long cartId;
 
-    @Column(name = "cart_name")
-    private String cartName;
-
     @Column(name = "user_id")
     private Long userId;
 
@@ -35,8 +32,7 @@ public class Cart {
     )
     private List<Product> products = new ArrayList<>();
 
-    public Cart(String cartName, Long userId, List<Product> products) {
-        this.cartName = cartName;
+    public Cart(Long userId, List<Product> products) {
         this.userId = userId;
         this.products = products;
     }
