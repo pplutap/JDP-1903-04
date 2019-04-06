@@ -8,10 +8,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity(name = "user")
 public class User {
 
