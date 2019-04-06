@@ -16,8 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-@Entity
-@Table(name = "user")
+@Entity(name = "\"order\"")
 public class User {
     private Long userId;
     private String userName;
@@ -63,6 +62,6 @@ public class User {
 
     enum Status{
         BANNED,
-        NOTBANNED
+        NOT_BANNED
     }
 }
