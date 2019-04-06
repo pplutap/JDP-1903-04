@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
+@Getter
 @Entity(name = "\"order\"")
 public class User {
     @Id
