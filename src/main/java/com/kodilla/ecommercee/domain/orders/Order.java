@@ -1,27 +1,31 @@
 package com.kodilla.ecommercee.domain.orders;
 
-import com.kodilla.ecommercee.domain.users.User;
+import com.kodilla.ecommercee.domain.carts.Cart;
+import com.kodilla.ecommercee.domain.products.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Setter
+@NoArgsConstructor
 @Getter
-@Entity(name = "\"order\"")
+@Setter
 public class Order {
+    private Long orderId;
+    private Date date;
+    private Long userId;
+    private List<Product> products = new ArrayList<>();
+    private boolean isPaid = false;
+    private boolean isVerified = false;
+    private boolean isSubmited = false;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
+    public Order(Long userId, Cart cart) {
+        this.userId = userId;
+        this.products = cart.getProducts();
+    }
 }

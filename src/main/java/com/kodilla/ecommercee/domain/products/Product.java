@@ -1,23 +1,27 @@
 package com.kodilla.ecommercee.domain.products;
 
+
 import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.groups.Group;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
-@Setter
 @Getter
+@Setter
 @Entity(name = "product")
 public class Product {
+
+    public Product(String name, String description, Group group) {
+        this.name = name;
+        this.description = description;
+        this.group = group;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,24 +34,11 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "price")
-    private BigDecimal price;
-
-    @Column(name = "isDeleted")
-    private boolean isDeleted;
-
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
-
-    public Product(String name, String description, BigDecimal price, boolean isDeleted) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.isDeleted = isDeleted;
-    }
 
 }

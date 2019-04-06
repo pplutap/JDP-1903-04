@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain.orders;
 
+import com.kodilla.ecommercee.domain.products.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,5 +15,6 @@ import java.util.List;
 @Setter
 public class OrderDto {
     private Long orderId;
-    private List<Item> items = new ArrayList<>();
+    private Long userId;
+    private List<ProductDto> productDtos = new ArrayList<>();
 }

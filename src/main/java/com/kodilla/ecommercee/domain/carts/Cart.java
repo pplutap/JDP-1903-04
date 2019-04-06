@@ -7,19 +7,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
 @Entity(name = "cart")
 public class Cart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long cartId;
+
+    @Column(name = "user_id")
+    private Long userId;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -28,4 +31,10 @@ public class Cart {
             inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")}
     )
     private List<Product> products = new ArrayList<>();
+
+    public Cart(Long userId, List<Product> products) {
+        this.userId = userId;
+        this.products = products;
+    }
+
 }

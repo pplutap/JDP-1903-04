@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain.groups;
 
 import com.kodilla.ecommercee.domain.products.Product;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
 @Entity(name = "group")
+@Getter
+@Setter
 public class Group {
 
     @Id
