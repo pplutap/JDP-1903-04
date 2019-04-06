@@ -13,7 +13,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ItemDto {
     private Long itemId;
+<<<<<<< HEAD
     private OrderDto order;
+=======
+    private Order order;
+>>>>>>> 1f8caf8cd7ad7c4f02648906c5c592607332b89f
     private Long productId;
     private String productName;
     private String productDescription;

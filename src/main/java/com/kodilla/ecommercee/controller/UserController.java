@@ -1,13 +1,15 @@
 package com.kodilla.ecommercee.controller;
 
+<<<<<<< HEAD
 import com.kodilla.ecommercee.domain.users.UserDto;
+=======
+import com.kodilla.ecommercee.domain.user.UserDto;
+>>>>>>> 1f8caf8cd7ad7c4f02648906c5c592607332b89f
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -35,7 +37,7 @@ public class UserController {
 
     private UserDto getUserForSpecificID(Long id){
         for (UserDto user:users){
-            if (user.getId()==id){
+            if (user.getUserId()==id){
                 return user;
             }
         }
