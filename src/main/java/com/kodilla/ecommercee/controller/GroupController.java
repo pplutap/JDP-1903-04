@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.GroupDto;
-import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.groups.GroupDto;
+import com.kodilla.ecommercee.domain.products.ProductDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class GroupController {
     }
 
     private List<GroupDto> groupDtos() {
-        GroupDto groupDto1 = new GroupDto(1L, "groupNameTest1", products);
+        GroupDto groupDto1 = new GroupDto(1L, "groupNamgeTest1", products);
         GroupDto groupDto5 = new GroupDto(5L, "groupNameTest5", products);
         if (groups.isEmpty()) {
             groups.add(groupDto1);
