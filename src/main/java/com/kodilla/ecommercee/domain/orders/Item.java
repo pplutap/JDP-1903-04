@@ -9,17 +9,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "ITEMS")
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@AllArgsConstructor
 @Setter
+@Getter
+@Entity(name = "item")
 public class Item {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true)
     private Long id;
     private double quantity;
     private BigDecimal productPrice;

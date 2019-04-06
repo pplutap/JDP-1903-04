@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain.users;
 
 import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.orders.Order;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@Entity(name = "user")
-@Getter
+@AllArgsConstructor
 @Setter
+@Getter
+@Entity(name = "user")
 public class User {
 
     @Id
@@ -21,6 +23,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "username")
     private String username;
 
     @Column(name = "is_blocked")
@@ -34,7 +37,7 @@ public class User {
             targetEntity = Order.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Order> orders = new ArrayList<>();
 
