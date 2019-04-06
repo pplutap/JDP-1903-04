@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "deleteProduct")
-    public void deleteProduct(@RequestParam("Id") long productId) {
+    public void deleteProduct(@RequestParam("id") long productId) {
         returnListProduct();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getProductId().equals(productId)) {
