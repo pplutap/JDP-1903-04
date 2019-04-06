@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.groups.GroupDto;
+import com.kodilla.ecommercee.domain.products.ProductDto;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +57,9 @@ public class ProductController {
     }
 
     private List<ProductDto> returnListProduct() {
-        ProductDto computer = new ProductDto(1L, "computer", "test");
-        ProductDto laptop = new ProductDto(2L, "laptop", "test");
+        GroupDto electronic = new GroupDto();
+        ProductDto computer = new ProductDto(1L, "computer", "test",electronic);
+        ProductDto laptop = new ProductDto(2L, "laptop", "test",electronic);
         if (products.isEmpty()) {
             products.add(computer);
             products.add(laptop);
