@@ -1,12 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-<<<<<<< HEAD
 import com.kodilla.ecommercee.domain.groups.GroupDto;
-import com.kodilla.ecommercee.domain.order.ItemDto;
-=======
-import com.kodilla.ecommercee.domain.group.GroupDto;
-import com.kodilla.ecommercee.domain.product.ProductDto;
->>>>>>> 1f8caf8cd7ad7c4f02648906c5c592607332b89f
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -16,7 +10,7 @@ import java.util.List;
 @RequestMapping("/v1/group")
 public class GroupController {
     private List<GroupDto> groups = Collections.emptyList();
-    private List<ItemDto> products = Collections.emptyList();
+    private List<ProductDto> products = Collections.emptyList();
 
     @GetMapping(value = "getGroups")
     public List<GroupDto> getGroups() {
@@ -32,7 +26,7 @@ public class GroupController {
     public GroupDto getGroup(@RequestParam Long groupId) {
         groupDtos();
         for (GroupDto group : groups) {
-            if (group.getId().equals(groupId)) {
+            if (group.getGroupId().equals(groupId)) {
                 return group;
             }
         }
@@ -41,11 +35,11 @@ public class GroupController {
 
     @PutMapping(value = "updateGroup")
     public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
-        Long groupId = groupDto.getId();
+        Long groupId = groupDto.getGroupId();
         for (GroupDto group : groups) {
-            if (group.getId().equals(groupId)) {
+            if (group.getGroupId().equals(groupId)) {
                 group.setGroupName(groupDto.getGroupName());
-                group.setProductsInGroup(groupDto.getProductsInGroup());
+                group.setProducts(groupDto.getProducts());
             }
         }
         return groupDto;

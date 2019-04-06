@@ -10,11 +10,11 @@ public class OrderMapper {
     @Autowired
     ItemMapper itemMapper;
 
-    public Order OrderDtoToOrder(OrderDto orderDto){
+    public Order orderDtoToOrder(OrderDto orderDto){
         return new Order(orderDto.getOrderId(), orderDto.getDate(), orderDto.getUser(),itemMapper.itemDtoListToItemList(orderDto.getItems()),orderDto.getPaid());
     }
 
-    public OrderDto OrderToOrderDto(Order order){
+    public OrderDto orderToOrderDto(Order order){
         return new OrderDto(order.getId(), order.getDate(), order.getUser(), itemMapper.itemListToItemDtoList(order.getItems()), order.getPaid());
     }
 }

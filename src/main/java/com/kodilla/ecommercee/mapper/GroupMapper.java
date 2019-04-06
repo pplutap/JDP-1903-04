@@ -11,11 +11,11 @@ public class GroupMapper {
     @Autowired
     ProductMapper productMapper;
 
-    public Group mapToGroup(final GroupDto groupDto){
-        return new Group(groupDto.getGroupName(),productMapper.mapToProductList(groupDto.getProductsInGroup()));
+    public Group groupDtoToGroup(final GroupDto groupDto){
+        return new Group(groupDto.getGroupId(), groupDto.getGroupName(), productMapper.productDtoListToProductList(groupDto.getProducts()));
     }
 
-    public GroupDto mapToGroupDto(final Group group){
-        return new GroupDto(group.getGroupId(),group.getGroupName(),productMapper.mapToProductDtoList(group.getProductsInGroup()));
+    public GroupDto groupToGroupDto(final Group group){
+        return new GroupDto(group.getGroupId(), group.getGroupName(), productMapper.productListToProductDtoList(group.getProductsInGroup()));
     }
 }
