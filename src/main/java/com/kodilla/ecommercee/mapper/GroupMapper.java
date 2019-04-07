@@ -19,6 +19,6 @@ public class GroupMapper {
     }
 
     public GroupDto mapToGroupDto(final Group group){
-        return new GroupDto(group.getGroupId(),group.getName(),productMapper.mapToProductDtoList(group.getProductsInGroup()));
+        return new GroupDto(group.getGroupId(),group.getGroupName(),productMapper.mapToProductDtoList(group.getProductsInGroup()));
     }
 }
