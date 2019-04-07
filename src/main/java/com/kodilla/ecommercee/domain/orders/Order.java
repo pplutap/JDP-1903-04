@@ -20,7 +20,7 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue
-    @Column(name = "order_id", unique = true)
+    @Column(name = "id", unique = true)
     private Long id;
     @NotNull
     @Column(name = "date")

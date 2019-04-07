@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class Item {
     @Id
     @GeneratedValue
-    @Column(name = "item_id", unique = true)
+    @Column(name = "id", unique = true)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "order_id")

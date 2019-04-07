@@ -30,7 +30,7 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "isDeleted")
+    @Column(name = "is_deleted")
     private boolean deleted;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
