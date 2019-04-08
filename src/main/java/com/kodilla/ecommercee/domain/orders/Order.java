@@ -20,7 +20,7 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue
-    @Column(name = "order_id", unique = true)
+    @Column(name = "id", unique = true)
     private Long id;
     @NotNull
     @Column(name = "date")
@@ -36,7 +36,6 @@ public class Order {
     )
     private List<Item> items = new ArrayList<>();
     @NotNull
-    @Column(name = "paid")
+    @Column(name = "isPaid")
     private Boolean paid;
-
 }

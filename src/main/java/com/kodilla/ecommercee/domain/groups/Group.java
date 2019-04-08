@@ -12,15 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "groups")
+@Entity
+@Table(name = "\"group\"")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long groupId;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "group_name")
+    private String groupName;
 
     @OneToMany(
             targetEntity = Product.class,
@@ -30,8 +31,8 @@ public class Group {
     )
     private List<Product> productsInGroup = new ArrayList<>();
 
-    public Group(String name, List<Product> productsInGroup) {
-        this.name = name;
+    public Group(String groupName, List<Product> productsInGroup) {
+        this.groupName = groupName;
         this.productsInGroup = productsInGroup;
     }
 }
