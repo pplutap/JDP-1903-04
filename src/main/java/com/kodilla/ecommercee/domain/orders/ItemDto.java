@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class ItemDto {
     private Long id;
-    private Order order;
+    private OrderDto order;
     private Long productId;
     private String productName;
     private String productDescription;
