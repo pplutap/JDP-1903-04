@@ -8,4 +8,7 @@ import java.util.List;
 @Repository
 public interface GroupRepository extends CrudRepository<Group, Long> {
 
+    @Override
+    List<Group> findAll();
+
 }
