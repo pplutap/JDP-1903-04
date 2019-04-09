@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain.carts;
 import com.kodilla.ecommercee.domain.products.Product;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,26 +24,51 @@ public class CartTestSuite {
     @Autowired
     private ProductRepository productRepository;
 
+    public void deleteAllDummyData(Cart cart, Product product) {
+
+        try {
+            cartRepository.delete(cart);
+            productRepository.delete(product);
+        } catch (Exception e) {
+//            do nothing
+        }
+    }
+
     @Test
     public void testAddingRowToTheCartEntity() {
 //    Given
         Cart cart = new Cart();
+        int openingCartEntitySize = cartRepository.findAll().size();
 
 //    When
         cartRepository.save(cart);
         Long cartId = cart.getCartId();
-        List<Cart> carts = (List<Cart>) cartRepository.findAll();
+        List<Cart> carts = cartRepository.findAll();
 
 //    Then
-        assertEquals(1, carts.size());
-        assertEquals(carts.get(0).getCartId(), cartId);
+        assertEquals(openingCartEntitySize + 1 , carts.size());
+        assertEquals(carts.get(openingCartEntitySize).getCartId(), cartId);
 
-//    ClenUp
-        try {
-            cartRepository.delete(cart);
-        } catch (Exception e) {
-//          do nothing
-        }
+//    Cleanup
+        deleteAllDummyData(cart, null);
+    }
+
+    @Test
+    public void testAddNullObject() {
+//    Given
+        Cart cart = new Cart();
+        cart.setProducts(null);
+        int openingCartEntitySize = cartRepository.findAll().size();
+
+//    When+
+        cartRepository.save(cart);
+        List<Cart> carts = cartRepository.findAll();
+
+//    Then
+        assertEquals(openingCartEntitySize + 1 , carts.size());
+
+//    Cleanup
+        deleteAllDummyData(cart, null);
     }
 
 
@@ -51,25 +77,65 @@ public class CartTestSuite {
 //    Given
         Product product = new Product("Zapałki","10 boxes with 20 matches", new BigDecimal(2),false);
         Cart cart = new Cart();
+        int openingProductEntitySize = productRepository.findAll().size();
+
 //    When
         cart.getProducts().add(product);
         cartRepository.save(cart);
         long productId = product.getProductId();
         long cartId = cart.getCartId();
 
-        List<Product> products = (List<Product>)productRepository.findAll();
+        List<Product> products = productRepository.findAll();
 
 //    Then
         assertNotEquals(0L, cartId );
         assertNotEquals(0L, productId);
-        assertEquals(1, products.size());
+        assertEquals(openingProductEntitySize + 1, products.size());
 
 //    Cleanup
-        try {
-            cartRepository.delete(cart);
-            productRepository.delete(product);
-        } catch (Exception e) {
-//            do nothing
-        }
+        deleteAllDummyData(cart, product);
+    }
+
+    @Test
+    public void testMissingDataInRelationCartProduct() {
+//     Given
+        Product product = null;
+        Cart cart = new Cart();
+        int openingProductEntitySize = productRepository.findAll().size();
+
+//     When
+        cart.getProducts().add(product);
+        List<Product> products = productRepository.findAll();
+
+//     Then
+        assertNotEquals(openingProductEntitySize + 1, products.size());
+
+//     Cleanup
+        deleteAllDummyData(cart, product);
+    }
+
+    @Test
+    public void testAddProductWithMissedProductData() {
+//     Given
+        Product product = new Product("Masło", "Małopolskie mleczarnie", null, true);
+        Cart cart = new Cart();
+        int openingProductEntitySize = productRepository.findAll().size();
+
+//    When
+        cart.getProducts().add(product);
+        cartRepository.save(cart);
+        long productId = product.getProductId();
+        long cartId = cart.getCartId();
+
+        List<Product> products = productRepository.findAll();
+
+//    Then
+        assertNotEquals(0L, cartId );
+        assertNotEquals(0L, productId);
+        assertEquals(openingProductEntitySize + 1, products.size());
+
+//    Cleanup
+        deleteAllDummyData(cart, product);
+
     }
 }
