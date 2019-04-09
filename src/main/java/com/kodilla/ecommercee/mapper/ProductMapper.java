@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class ProductMapper {
 
     public Product mapToProduct(final ProductDto productDto) {
-        return new Product(productDto.getName(), productDto.getDescription(), productDto.getPrice(), productDto.isDeleted());
+        return new Product(productDto.getName(), productDto.getDescription(), productDto.getPrice());
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
@@ -22,8 +22,7 @@ public class ProductMapper {
 
     public List<Product> mapToProductList(final List<ProductDto> productDtoList) {
         return productDtoList.stream()
-                .map(productDto -> new Product(productDto.getName(), productDto.getDescription(), productDto.getPrice(),
-                        productDto.isDeleted()))
+                .map(productDto -> new Product(productDto.getName(), productDto.getDescription(), productDto.getPrice()))
                 .collect(Collectors.toList());
     }
 }
