@@ -28,7 +28,7 @@ public class CartController {
 
     @GetMapping(value = "getProductsFromCart")
     public List<ProductDto> getProductsFromCart(@RequestParam Long cartId) {
-        Product jam = new Product("Jam", "Strawberry jam", new BigDecimal(5), false);
+        Product jam = new Product("Jam", "Strawberry jam", new BigDecimal(5));
         Cart cart1 = new Cart(cartId, productService.getAllProducts());
         cart1.getProducts().add(jam);
         return productMapper.mapToProductDtoList(cart1.getProducts());
