@@ -1,0 +1,116 @@
+package com.kodilla.ecommercee.repository;
+
+import com.kodilla.ecommercee.domain.carts.Cart;
+import com.kodilla.ecommercee.domain.orders.Order;
+import com.kodilla.ecommercee.domain.users.User;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.Assert.assertEquals;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UserRepositoryTest {
+
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CartRepository cartRepository;
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Test
+    public void saveUserTest(){
+        //Given
+        User user = new User();
+        //When
+        List<User> usersBefore = userRepository.findAll();
+        userRepository.save(user);
+        //Then
+        List<User> usersAfter = userRepository.findAll();
+        assertEquals(usersBefore.size()+1, usersAfter.size());
+        //CleanUp
+        try{
+            userRepository.delete(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void findByIdTest(){
+        //Given
+        User user = new User();
+        //When
+        userRepository.save(user);
+        //Then
+        Long userId = user.getUserId();
+        Optional<User> testUser = userRepository.findById(userId);
+        User userToTest = testUser.get();
+        assertEquals(userId, userToTest.getUserId());
+        //CleanUp
+        try{
+            userRepository.delete(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void relationUserCartTest(){
+        //Given
+        Cart cart = new Cart();
+        User user = new User();
+        user.setCart(cart);
+        //When
+        userRepository.save(user);
+        //Then
+        Long userId = user.getUserId();
+        Long cartId = cart.getCartId();
+        Optional<User> testUser = userRepository.findById(userId);
+        User userToTest = testUser.get();
+        assertEquals(userToTest.getCart().getCartId(), cartId);
+        //CleanUp
+        try{
+            userRepository.delete(user);
+            cartRepository.delete(cart);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void relationUserOrderTest(){
+        //Given
+        User user = new User();
+        Order order1 = new Order(new Date(), user, Collections.emptyList(), true);
+        Order order2 = new Order(new Date(), user, Collections.emptyList(), false);
+        user.getOrders().add(order1);
+        user.getOrders().add(order2);
+        //When
+        userRepository.save(user);
+        Long userId = user.getUserId();
+        Optional<User> testUser = userRepository.findById(userId);
+        User userToTest = testUser.get();
+        int expected = 2;
+        //Then
+        assertEquals(expected, userToTest.getOrders().size());
+        //CleanUp
+        try{
+            userRepository.delete(user);
+            orderRepository.delete(order1);
+            orderRepository.delete(order2);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+}

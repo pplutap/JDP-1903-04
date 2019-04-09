@@ -39,4 +39,10 @@ public class Order {
     @Column(name = "paid")
     private Boolean paid;
 
+    public Order(@NotNull Date date, User user, List<Item> items, @NotNull Boolean paid) {
+        this.date = date;
+        this.user = user;
+        this.items = items;
+        this.paid = paid;
+    }
 }
