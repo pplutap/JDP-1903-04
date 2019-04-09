@@ -30,56 +30,56 @@ public class CartTestSuite {
             cartRepository.delete(cart);
             productRepository.delete(product);
         } catch (Exception e) {
-//            do nothing
+            //do nothing
         }
     }
 
     @Test
     public void testAddingRowToTheCartEntity() {
-//    Given
+    //    Given
         Cart cart = new Cart();
         int openingCartEntitySize = cartRepository.findAll().size();
 
-//    When
+    //    When
         cartRepository.save(cart);
         Long cartId = cart.getCartId();
         List<Cart> carts = cartRepository.findAll();
 
-//    Then
+    //    Then
         assertEquals(openingCartEntitySize + 1 , carts.size());
         assertEquals(carts.get(openingCartEntitySize).getCartId(), cartId);
 
-//    Cleanup
+    //    Cleanup
         deleteAllDummyData(cart, null);
     }
 
     @Test
     public void testAddNullObject() {
-//    Given
+    //    Given
         Cart cart = new Cart();
         cart.setProducts(null);
         int openingCartEntitySize = cartRepository.findAll().size();
 
-//    When+
+    //    When+
         cartRepository.save(cart);
         List<Cart> carts = cartRepository.findAll();
 
-//    Then
+    //    Then
         assertEquals(openingCartEntitySize + 1 , carts.size());
 
-//    Cleanup
+    //    Cleanup
         deleteAllDummyData(cart, null);
     }
 
 
     @Test
     public void testRelationCartProduct() {
-//    Given
+    //    Given
         Product product = new Product("Zapałki","10 boxes with 20 matches", new BigDecimal(2),false);
         Cart cart = new Cart();
         int openingProductEntitySize = productRepository.findAll().size();
 
-//    When
+    //    When
         cart.getProducts().add(product);
         cartRepository.save(cart);
         long productId = product.getProductId();
@@ -87,41 +87,41 @@ public class CartTestSuite {
 
         List<Product> products = productRepository.findAll();
 
-//    Then
+    //    Then
         assertNotEquals(0L, cartId );
         assertNotEquals(0L, productId);
         assertEquals(openingProductEntitySize + 1, products.size());
 
-//    Cleanup
+    //    Cleanup
         deleteAllDummyData(cart, product);
     }
 
     @Test
     public void testMissingDataInRelationCartProduct() {
-//     Given
+    //     Given
         Product product = null;
         Cart cart = new Cart();
         int openingProductEntitySize = productRepository.findAll().size();
 
-//     When
+    //     When
         cart.getProducts().add(product);
         List<Product> products = productRepository.findAll();
 
-//     Then
+    //     Then
         assertNotEquals(openingProductEntitySize + 1, products.size());
 
-//     Cleanup
+    //     Cleanup
         deleteAllDummyData(cart, product);
     }
 
     @Test
     public void testAddProductWithMissedProductData() {
-//     Given
+    //     Given
         Product product = new Product("Masło", "Małopolskie mleczarnie", null, true);
         Cart cart = new Cart();
         int openingProductEntitySize = productRepository.findAll().size();
 
-//    When
+    //    When
         cart.getProducts().add(product);
         cartRepository.save(cart);
         long productId = product.getProductId();
@@ -129,12 +129,12 @@ public class CartTestSuite {
 
         List<Product> products = productRepository.findAll();
 
-//    Then
+    //    Then
         assertNotEquals(0L, cartId );
         assertNotEquals(0L, productId);
         assertEquals(openingProductEntitySize + 1, products.size());
 
-//    Cleanup
+    //    Cleanup
         deleteAllDummyData(cart, product);
 
     }
