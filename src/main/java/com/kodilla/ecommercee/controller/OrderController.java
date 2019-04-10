@@ -1,19 +1,12 @@
 package com.kodilla.ecommercee.controller;
-import com.kodilla.ecommercee.domain.carts.Cart;
-import com.kodilla.ecommercee.domain.orders.Order;
 import com.kodilla.ecommercee.domain.orders.OrderDto;
-import com.kodilla.ecommercee.domain.orders.ItemDto;
-import com.kodilla.ecommercee.domain.users.User;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/order")
