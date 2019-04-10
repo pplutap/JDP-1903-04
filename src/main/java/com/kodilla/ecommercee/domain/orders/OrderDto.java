@@ -1,12 +1,13 @@
 package com.kodilla.ecommercee.domain.orders;
 
 import com.kodilla.ecommercee.domain.users.User;
+import com.kodilla.ecommercee.domain.users.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,8 +16,8 @@ import java.util.List;
 @Setter
 public class OrderDto {
     private Long orderId;
-    private Date date;
-    private User user;
+    private LocalDate date;
+    private UserDto user;
     private List<ItemDto> items;
     private Boolean paid;
 }
