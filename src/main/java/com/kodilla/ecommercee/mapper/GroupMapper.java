@@ -26,13 +26,13 @@ public class GroupMapper {
         return new GroupDto(group.getGroupId(), group.getGroupName(), productMapper.mapToProductDtoList(group.getProductsInGroup()));
     }
 
-    public List<Group> mapToGroupDtoList(final List<GroupDto> groupDtoList) {
+    public List<Group> mapToGroupList(final List<GroupDto> groupDtoList) {
         return groupDtoList.stream()
                 .map(groupDto -> new Group(groupDto.getGroupName(), productMapper.mapToProductList(groupDto.getProductsInGroup())))
                 .collect(Collectors.toList());
     }
 
-    public List<GroupDto> mapToGroupList(final List<Group> groupList) {
+    public List<GroupDto> mapToGroupDtoList(final List<Group> groupList) {
         return groupList.stream()
                 .map(group -> new GroupDto(group.getGroupId(), group.getGroupName(),
                         productMapper.mapToProductDtoList(group.getProductsInGroup())))

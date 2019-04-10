@@ -25,7 +25,7 @@ public class GroupController {
 
     @GetMapping(value = "getGroups")
     public List<GroupDto> getGroups() {
-        return groupMapper.mapToGroupList(groupService.getAllGroups());
+        return groupMapper.mapToGroupDtoList(groupService.getAllGroups());
     }
 
     @PostMapping(value = "createGroup")
