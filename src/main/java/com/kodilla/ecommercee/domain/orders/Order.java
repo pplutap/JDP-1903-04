@@ -7,24 +7,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-@Entity(name = "\"order\"")
+@Entity
+@Table(name = "\"order\"")
 public class Order {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true)
     private Long id;
-    @NotNull
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -35,7 +33,12 @@ public class Order {
             fetch = FetchType.LAZY
     )
     private List<Item> items = new ArrayList<>();
-    @NotNull
-    @Column(name = "isPaid")
-    private Boolean paid;
+
+    @Column(name = "is_paid")
+    private boolean paid;
+
+    public Order(LocalDate date, boolean paid) {
+        this.date = date;
+        this.paid = paid;
+    }
 }
