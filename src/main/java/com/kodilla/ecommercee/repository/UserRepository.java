@@ -1,10 +1,11 @@
 package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.users.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.List;
 
+public interface UserRepository extends CrudRepository<User, Long> {
+    @Override
+    List<User> findAll();
 }

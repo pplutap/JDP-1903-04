@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 @Entity
@@ -33,12 +34,18 @@ public class Order {
             fetch = FetchType.LAZY
     )
     private List<Item> items = new ArrayList<>();
-
     @Column(name = "is_paid")
     private boolean paid;
 
     public Order(LocalDate date, boolean paid) {
         this.date = date;
+        this.paid = paid;
+    }
+
+    public Order(LocalDate date, User user, List<Item> items, boolean paid) {
+        this.date = date;
+        this.user = user;
+        this.items = items;
         this.paid = paid;
     }
 }
