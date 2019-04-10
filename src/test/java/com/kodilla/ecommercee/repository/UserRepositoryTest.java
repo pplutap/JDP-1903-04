@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -88,8 +86,8 @@ public class UserRepositoryTest {
     public void relationUserOrderTest(){
         //Given
         User user = new User();
-        Order order1 = new Order(new Date(), user, Collections.emptyList(), true);
-        Order order2 = new Order(new Date(), user, Collections.emptyList(), false);
+        Order order1 = new Order(LocalDate.now(), user, new ArrayList<>(), false);
+        Order order2 = new Order(LocalDate.now(), user, new ArrayList<>(), true);
         user.getOrders().add(order1);
         user.getOrders().add(order2);
         //When
