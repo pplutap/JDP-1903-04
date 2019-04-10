@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class OrderMapper {
     @Autowired
-    ItemMapper itemMapper;
+    private ItemMapper itemMapper;
     @Autowired
     private UserMapper userMapper;
 

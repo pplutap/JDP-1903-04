@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -19,5 +19,5 @@ public class UserDto {
     private String username;
     private boolean blocked;
     private CartDto cart;
-    private List<OrderDto> orders = Collections.emptyList();
+    private List<OrderDto> orders = new ArrayList<>();
 }

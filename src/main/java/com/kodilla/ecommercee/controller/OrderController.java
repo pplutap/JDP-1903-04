@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.orders.Order;
 import com.kodilla.ecommercee.domain.orders.OrderDto;
 import com.kodilla.ecommercee.domain.orders.ItemDto;
 import com.kodilla.ecommercee.domain.users.User;
+import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +34,18 @@ public class OrderController {
     }
 
     @GetMapping("/getOrder")
-    private OrderDto getOrder(@RequestParam("orderId") long orderId){
-        Optional<Order> order = orderRepository.findById(orderId);
-        return orderMapper.orderToOrderDto(order.get());
+    private OrderDto getOrder(@RequestParam("orderId") long orderId) throws OrderNotFoundException {
+        return orderRepository.findById(orderId)
+                .map(orderMapper::orderToOrderDto)
+                .orElseThrow(OrderNotFoundException::new);
     }
 
     @PutMapping("/updateOrder")
-    private OrderDto updateOrder(@RequestBody OrderDto orderDto){
+    private OrderDto updateOrder(@RequestBody OrderDto orderDto) throws OrderNotFoundException {
         orderRepository.save(orderMapper.orderDtoToOrder(orderDto));
-        Optional<Order> order = orderRepository.findById(orderDto.getOrderId());
-        return orderMapper.orderToOrderDto(order.get());
+        return orderRepository.findById(orderDto.getOrderId())
+                .map(orderMapper::orderToOrderDto)
+                .orElseThrow(OrderNotFoundException::new);
     }
 
     @DeleteMapping("/deleteOrder")

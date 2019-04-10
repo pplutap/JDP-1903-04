@@ -10,8 +10,12 @@ import java.util.stream.Collectors;
 
 @Component
 public class ItemMapper {
-    @Autowired
     OrderMapper orderMapper;
+
+    @Autowired
+    public ItemMapper(OrderMapper orderMapper) {
+        this.orderMapper = orderMapper;
+    }
 
     public Item itemDtoToItem(final ItemDto item) {
         return new Item(item.getId(), orderMapper.orderDtoToOrder(item.getOrder()), item.getProductId(), item.getProductName(), item.getProductDescription(), item.getPrice(), item.getQuantity());
