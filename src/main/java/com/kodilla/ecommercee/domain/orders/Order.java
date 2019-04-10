@@ -33,7 +33,8 @@ public class Order {
             fetch = FetchType.LAZY
     )
     private List<Item> items = new ArrayList<>();
-    @Column(name = "paid")
+
+    @Column(name = "is_paid")
     private boolean paid;
 
     public Order(LocalDate date, boolean paid) {
