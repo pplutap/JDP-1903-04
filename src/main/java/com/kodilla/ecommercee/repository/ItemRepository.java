@@ -1,11 +1,8 @@
 package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.orders.Item;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+public interface ItemRepository extends JpaRepository<Item, Long> {
 
-public interface ItemRepository extends CrudRepository<Item, Long> {
-    @Override
-    List<Item> findAll();
 }
