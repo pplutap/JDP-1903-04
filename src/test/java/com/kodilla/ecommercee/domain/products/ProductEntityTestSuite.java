@@ -31,26 +31,23 @@ public class ProductEntityTestSuite {
     private Product lapDell = new Product(
             "Dell Latitude 5480",
             "i7-7820HQ 16GB 256SSD FHD 10Pro",
-            new BigDecimal(4590),
-            false);
+            new BigDecimal(4590));
     private Product appleAir = new Product(
             "Apple Macbook Air",
             "13' i5 8GB 256GB MREF2ZE/A 2018",
-            new BigDecimal(5999),
-            false);
+            new BigDecimal(5999));
     private Product asusVivo = new Product(
             "ASUS VivoBook 15 R564UA",
             "i5-8250U 8GB 256SSD MAT",
-            new BigDecimal(2599),
-            false);
+            new BigDecimal(2599));
     private List<Product> laptops = new ArrayList<>();
     private Group groupOfLaptops = new Group("Laptops", laptops);
 
-    private Product p1 = new Product("a", "da", new BigDecimal(1), false);
-    private Product p2 = new Product("b", "db", new BigDecimal(1), false);
-    private Product p3 = new Product("c", "dc", new BigDecimal(1), false);
-    private Product p4 = new Product("d", "de", new BigDecimal(1), false);
-    private Product p5 = new Product("e", "df", new BigDecimal(1), false);
+    private Product p1 = new Product("a", "da", new BigDecimal(1));
+    private Product p2 = new Product("b", "db", new BigDecimal(1));
+    private Product p3 = new Product("c", "dc", new BigDecimal(1));
+    private Product p4 = new Product("d", "de", new BigDecimal(1));
+    private Product p5 = new Product("e", "df", new BigDecimal(1));
 
     private Cart c1 = new Cart();
     private Cart c2 = new Cart();
