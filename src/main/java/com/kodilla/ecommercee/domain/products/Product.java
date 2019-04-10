@@ -40,10 +40,9 @@ public class Product {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    public Product(String name, String description, BigDecimal price, boolean deleted) {
+    public Product(String name, String description, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.deleted = deleted;
     }
 }

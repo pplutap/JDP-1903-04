@@ -8,7 +8,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
@@ -16,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "item")
 public class Item {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true)
     private Long id;
     @ManyToOne
@@ -25,16 +24,20 @@ public class Item {
     @NotNull
     @Column(name = "product_id")
     private Long productId;
-    @NotNull
     @Column(name = "product_name")
     private String productName;
-    @NotNull
     @Column(name = "product_description")
     private String productDescription;
-    @NotNull
     @Column(name = "price")
     private Double price;
-    @NotNull
     @Column(name = "quantity")
     private Double quantity;
+
+    public Item(@NotNull Long productId, String productName, String productDescription, Double price, Double quantity) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }
