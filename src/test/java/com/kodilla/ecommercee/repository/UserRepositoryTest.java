@@ -41,7 +41,6 @@ public class UserRepositoryTest {
         try{
             userRepository.delete(user);
         }catch (Exception e){
-            e.printStackTrace();
         }
     }
 
@@ -60,7 +59,6 @@ public class UserRepositoryTest {
         try{
             userRepository.delete(user);
         }catch (Exception e){
-            e.printStackTrace();
         }
     }
 
@@ -83,7 +81,6 @@ public class UserRepositoryTest {
             userRepository.delete(user);
             cartRepository.delete(cart);
         }catch (Exception e){
-            e.printStackTrace();
         }
     }
 
@@ -109,7 +106,6 @@ public class UserRepositoryTest {
             orderRepository.delete(order1);
             orderRepository.delete(order2);
         }catch (Exception e){
-            e.printStackTrace();
         }
     }
 
