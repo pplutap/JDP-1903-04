@@ -1,57 +1,45 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.controller.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.domain.groups.GroupDto;
 import com.kodilla.ecommercee.domain.products.ProductDto;
+import com.kodilla.ecommercee.mapper.GroupMapper;
+import com.kodilla.ecommercee.service.GroupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/group")
 public class GroupController {
-    private List<GroupDto> groups = new ArrayList<>();
-    private List<ProductDto> products = new ArrayList<>();
+    private GroupService groupService;
+    private GroupMapper groupMapper;
+
+    @Autowired
+    public GroupController(GroupService groupService, GroupMapper groupMapper) {
+        this.groupService = groupService;
+        this.groupMapper = groupMapper;
+    }
 
     @GetMapping(value = "getGroups")
     public List<GroupDto> getGroups() {
-        return groupDtos();
+        return groupMapper.mapToGroupList(groupService.getAllGroups());
     }
 
     @PostMapping(value = "createGroup")
     public void createGroup(@RequestBody GroupDto groupDto) {
-        groups.add(groupDto);
+        groupService.saveGroup(groupMapper.mapToGroup(groupDto));
     }
 
     @GetMapping(value = "getGroup")
-    public GroupDto getGroup(@RequestParam Long groupId) {
-        groupDtos();
-        for (GroupDto group : groups) {
-            if (group.getGroupId().equals(groupId)) {
-                return group;
-            }
-        }
-        return null;
+    public GroupDto getGroup(@RequestParam Long groupId) throws GroupNotFoundException {
+        return groupMapper.mapToGroupDto(groupService.getGroup(groupId).orElseThrow(GroupNotFoundException::new));
     }
 
     @PutMapping(value = "updateGroup")
     public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
-        Long groupId = groupDto.getGroupId();
-        for (GroupDto group : groups) {
-            if (group.getGroupId().equals(groupId)) {
-                group.setGroupName(groupDto.getGroupName());
-                group.setProductsInGroup(groupDto.getProductsInGroup());
-            }
-        }
-        return groupDto;
-    }
-
-    private List<GroupDto> groupDtos() {
-        GroupDto groupDto1 = new GroupDto(1L, "groupNameTest1", products);
-        GroupDto groupDto5 = new GroupDto(5L, "groupNameTest5", products);
-        if (groups.isEmpty()) {
-            groups.add(groupDto1);
-            groups.add(groupDto5);
-        }
-        return groups;
+        return groupMapper.mapToGroupDto(groupService.saveGroup(groupMapper.mapToGroup(groupDto)));
     }
 }
