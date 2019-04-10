@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.domain.carts;
 import com.kodilla.ecommercee.domain.products.Product;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,7 @@ public class CartTestSuite {
     @Test
     public void testRelationCartProduct() {
     //    Given
-        Product product = new Product("Zapałki","10 boxes with 20 matches", new BigDecimal(2),false);
+        Product product = new Product("Zapałki","10 boxes with 20 matches", new BigDecimal(2));
         Cart cart = new Cart();
         int openingProductEntitySize = productRepository.findAll().size();
 
@@ -117,7 +116,7 @@ public class CartTestSuite {
     @Test
     public void testAddProductWithMissedProductData() {
     //     Given
-        Product product = new Product("Masło", "Małopolskie mleczarnie", null, true);
+        Product product = new Product("Masło", "Małopolskie mleczarnie", null);
         Cart cart = new Cart();
         int openingProductEntitySize = productRepository.findAll().size();
 
