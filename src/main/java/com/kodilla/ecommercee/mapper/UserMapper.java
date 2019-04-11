@@ -8,19 +8,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
     private CartMapper cartMapper;
-    private OrderMapper orderMapper;
 
     @Autowired
-    public UserMapper(CartMapper cartMapper, OrderMapper orderMapper) {
+    public UserMapper(CartMapper cartMapper) {
         this.cartMapper = cartMapper;
-        this.orderMapper = orderMapper;
     }
 
     public User userDtoToUser(UserDto userDto){
-        return new User(userDto.getId(), userDto.getUsername(), userDto.isBlocked(), cartMapper.mapToCart(userDto.getCart()), orderMapper.orderDtoListoToOrderList(userDto.getOrders()));
+        return new User(userDto.getId(), userDto.getUsername(), userDto.isBlocked(), cartMapper.mapToCart(userDto.getCart()), userDto.getOrders());
     }
 
     public UserDto userToUserDto(User user){
-        return new UserDto(user.getUserId(), user.getUsername(), user.isBlocked(), cartMapper.mapToCartDto(user.getCart()), orderMapper.orderListToOrderDtoList(user.getOrders()));
+        return new UserDto(user.getUserId(), user.getUsername(), user.isBlocked(), cartMapper.mapToCartDto(user.getCart()), user.getOrders());
     }
 }

@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.controller;
-import com.kodilla.ecommercee.domain.orders.OrderDto;
+import com.kodilla.ecommercee.domain.orders.Order;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
-import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,31 +12,27 @@ import java.util.List;
 public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private OrderMapper orderMapper;
 
     @GetMapping("/getOrders")
-    private List<OrderDto> getOrders() {
-        return orderMapper.orderListToOrderDtoList(orderRepository.findAll());
+    private List<Order> getOrders() {
+        return orderRepository.findAll();
     }
 
     @PostMapping("/createOrder")
-    private void createOrder(@RequestBody OrderDto orderDto){
-        orderRepository.save(orderMapper.orderDtoToOrder(orderDto));
+    private void createOrder(@RequestBody Order order){
+        orderRepository.save(order);
     }
 
     @GetMapping("/getOrder")
-    private OrderDto getOrder(@RequestParam("orderId") long orderId) throws OrderNotFoundException {
+    private Order getOrder(@RequestParam("orderId") long orderId) throws OrderNotFoundException {
         return orderRepository.findById(orderId)
-                .map(orderMapper::orderToOrderDto)
                 .orElseThrow(OrderNotFoundException::new);
     }
 
     @PutMapping("/updateOrder")
-    private OrderDto updateOrder(@RequestBody OrderDto orderDto) throws OrderNotFoundException {
-        orderRepository.save(orderMapper.orderDtoToOrder(orderDto));
-        return orderRepository.findById(orderDto.getOrderId())
-                .map(orderMapper::orderToOrderDto)
+    private Order updateOrder(@RequestBody Order order) throws OrderNotFoundException {
+        orderRepository.save(order);
+        return orderRepository.findById(order.getId())
                 .orElseThrow(OrderNotFoundException::new);
     }
 

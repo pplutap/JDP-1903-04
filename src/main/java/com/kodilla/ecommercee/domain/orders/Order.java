@@ -1,10 +1,7 @@
 package com.kodilla.ecommercee.domain.orders;
 
 import com.kodilla.ecommercee.domain.users.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;

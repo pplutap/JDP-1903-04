@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.domain.users;
 
 import com.kodilla.ecommercee.domain.carts.CartDto;
-import com.kodilla.ecommercee.domain.orders.OrderDto;
+import com.kodilla.ecommercee.domain.orders.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +19,5 @@ public class UserDto {
     private String username;
     private boolean blocked;
     private CartDto cart;
-    private List<OrderDto> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 }
