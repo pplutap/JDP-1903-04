@@ -2,22 +2,17 @@ package com.kodilla.ecommercee.domain.users;
 
 import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.orders.Order;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
 @Entity(name = "user")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -41,10 +36,11 @@ public class User {
     )
     private List<Order> orders = new ArrayList<>();
 
-    public User(String username, boolean blocked, Cart cart) {
+    public User(Long id, String username, boolean blocked, Cart cart, List<Order> orders) {
+        this.userId = id;
         this.username = username;
         this.blocked = blocked;
         this.cart = cart;
+        this.orders = orders;
     }
-
 }

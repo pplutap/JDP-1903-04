@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.repository;
 import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.orders.Order;
 import com.kodilla.ecommercee.domain.users.User;
+import com.kodilla.ecommercee.domain.users.UserBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UserRepositoryTest {
     @Test
     public void saveUserTest(){
         //Given
-        User user = new User();
+        User user = new UserBuilder().createUser();
         //When
         List<User> usersBefore = userRepository.findAll();
         userRepository.save(user);
@@ -45,7 +46,7 @@ public class UserRepositoryTest {
     @Test
     public void findByIdTest(){
         //Given
-        User user = new User();
+        User user = new UserBuilder().createUser();
         //When
         userRepository.save(user);
         //Then
@@ -64,7 +65,7 @@ public class UserRepositoryTest {
     public void relationUserCartTest(){
         //Given
         Cart cart = new Cart();
-        User user = new User();
+        User user = new UserBuilder().createUser();
         user.setCart(cart);
         //When
         userRepository.save(user);
@@ -85,7 +86,7 @@ public class UserRepositoryTest {
     @Test
     public void relationUserOrderTest(){
         //Given
-        User user = new User();
+        User user = new UserBuilder().setOrders(new ArrayList<>()).createUser();
         Order order1 = new Order(LocalDate.now(), user, new ArrayList<>(), false);
         Order order2 = new Order(LocalDate.now(), user, new ArrayList<>(), true);
         user.getOrders().add(order1);
