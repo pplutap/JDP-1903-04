@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class GroupService {
-    private GroupRepository groupRepository;
+    private final GroupRepository groupRepository;
 
     @Autowired
     public GroupService(GroupRepository groupRepository) {
