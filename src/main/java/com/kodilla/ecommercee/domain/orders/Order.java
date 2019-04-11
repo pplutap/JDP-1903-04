@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain.orders;
 
+import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.users.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,7 +38,7 @@ public class Order {
     @Column(name = "is_paid")
     private boolean paid;
 
-    public Order(LocalDate date, boolean paid) {
+    public Order(LocalDate date, boolean paid,List<Item> items) {
         this.date = date;
         this.paid = paid;
     }
