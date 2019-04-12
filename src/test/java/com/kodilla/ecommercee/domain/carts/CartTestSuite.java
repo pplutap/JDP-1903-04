@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.domain.carts;
 import com.kodilla.ecommercee.domain.products.Product;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

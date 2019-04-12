@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "\"group\"")
+@Entity
+@Table(name = "\"group\"")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

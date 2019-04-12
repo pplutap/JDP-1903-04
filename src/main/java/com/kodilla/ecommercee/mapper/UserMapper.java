@@ -7,15 +7,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
-
-    @Autowired
     private CartMapper cartMapper;
 
-    public User mapToUser(UserDto userDto) {
-        return new User(userDto.getUsername(), userDto.isBlocked());
+    @Autowired
+    public UserMapper(CartMapper cartMapper) {
+        this.cartMapper = cartMapper;
     }
 
-    public UserDto mapToUserDto(User user) {
-        return new UserDto(user.getUserId(), user.getUsername(), user.isBlocked());
+    public User userDtoToUser(UserDto userDto){
+        return new User(userDto.getId(), userDto.getUsername(), userDto.isBlocked(), cartMapper.mapToCart(userDto.getCart()), userDto.getOrders());
+    }
+
+    public UserDto userToUserDto(User user){
+        return new UserDto(user.getUserId(), user.getUsername(), user.isBlocked(), cartMapper.mapToCartDto(user.getCart()), user.getOrders());
     }
 }
