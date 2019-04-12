@@ -41,10 +41,24 @@ public class User {
     )
     private List<Order> orders = new ArrayList<>();
 
-    public User(String username, boolean blocked, Cart cart) {
+    public User(String username, boolean blocked) {
         this.username = username;
         this.blocked = blocked;
-        this.cart = cart;
+        this.cart = new Cart();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return userId.equals(user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31* userId.hashCode();
+    }
 }

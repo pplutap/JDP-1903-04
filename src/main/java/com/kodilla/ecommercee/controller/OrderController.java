@@ -65,7 +65,7 @@ public class OrderController {
     }
 
     private List<OrderDto> getOrderDtos(){
-        User user = new User("TestName", false, new Cart());
+        User user = new User("TestName", false);
         List<ItemDto> productDtos1 = new ArrayList<>();
         List<ItemDto> productDtos2 = new ArrayList<>();
         OrderDto orderDto1 = new OrderDto(123L, new Date(), user,productDtos1, true);
