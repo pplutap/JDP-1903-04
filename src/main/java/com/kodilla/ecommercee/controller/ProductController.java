@@ -2,7 +2,7 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.products.Product;
 import com.kodilla.ecommercee.domain.products.ProductDto;
-import com.kodilla.ecommercee.exception.ProductNotFoundException;
+import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,9 @@ public class ProductController {
     @GetMapping(value = "getProduct")
     public ProductDto getProduct(@RequestParam("productId") long productId) throws ProductNotFoundException {
         return productMapper.mapToProductDto(productService.getProduct(productId)
-                .orElseThrow(() -> new ProductNotFoundException("There is no product with id equals: "+productId+" in Data Base")));
+                .orElseThrow(() -> new ProductNotFoundException(productId)));
     }
 
-    //@PostMapping(value = "createProduct", consumes = APPLICATION_JSON_VALUE)
     @PostMapping(value = "createProduct")
     public void createProduct(@RequestBody ProductDto productDto) {
         productService.saveProduct(productMapper.mapToProduct(productDto));
@@ -43,8 +42,7 @@ public class ProductController {
     @PutMapping(value = "updateProduct")
     public ProductDto updateProduct(@RequestBody ProductDto productDto) throws ProductNotFoundException{
         Product product = productService.getProduct(productDto.getProductId())
-                .orElseThrow(() -> new ProductNotFoundException(
-                        "There is no product with id equals: "+productDto.getProductId()+" in Data Base"));
+                .orElseThrow(() -> new ProductNotFoundException(productDto.getProductId()));
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
