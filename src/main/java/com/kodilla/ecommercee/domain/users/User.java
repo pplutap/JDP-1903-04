@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
 @Entity(name = "user")
@@ -41,9 +40,8 @@ public class User {
     )
     private List<Order> orders = new ArrayList<>();
 
-    public User(String username, boolean blocked) {
+    public User(String username) {
         this.username = username;
-        this.blocked = blocked;
         this.cart = new Cart();
     }
 

@@ -15,7 +15,7 @@ public class UserMapper {
     }
 
     public User userDtoToUser(UserDto userDto){
-        return new User(userDto.getId(), userDto.getUsername(), userDto.isBlocked(), cartMapper.mapToCart(userDto.getCart()), userDto.getOrders());
+        return new User(userDto.getUsername());
     }
 
     public UserDto userToUserDto(User user){

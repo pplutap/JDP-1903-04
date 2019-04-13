@@ -14,7 +14,7 @@ public class GuavaCacheService {
     static{
         userCache = CacheBuilder.newBuilder()
                 .maximumSize(10000)
-                .expireAfterAccess(5, TimeUnit.SECONDS)
+                .expireAfterAccess(5, TimeUnit.MINUTES) //Narazie do testow
                 .build(
                         new CacheLoader<User, Long>() {
                             @Override
