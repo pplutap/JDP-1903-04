@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee.controller.Exception;
+package com.kodilla.ecommercee.controller.exception;
 
 public class CartNotFoundException extends RuntimeException {
 

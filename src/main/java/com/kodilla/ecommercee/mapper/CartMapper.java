@@ -23,16 +23,4 @@ public class CartMapper {
     public CartDto mapToCartDto(final Cart cart) {
         return new CartDto(cart.getCartId(), cart.getItems());
     }
-
-    public List<CartDto> mapToCartDtoList(final List<Cart> carts) {
-        return carts.stream()
-                .map(cart -> new CartDto(cart.getCartId(), cart.getItems()))
-                .collect(Collectors.toList());
-    }
-
-    public List<Cart> mapToCartList(final List<CartDto> cartDtoList) {
-        return cartDtoList.stream()
-                .map(cartDto -> new Cart(cartDto.getCartId(),cartDto.getItems()))
-                .collect(Collectors.toList());
-    }
 }

@@ -1,15 +1,15 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.controller.Exception.CartNotFoundException;
-import com.kodilla.ecommercee.controller.Exception.UserNotFoundException;
+import com.kodilla.ecommercee.controller.exception.CartNotFoundException;
+import com.kodilla.ecommercee.controller.exception.ItemNotFoundException;
+import com.kodilla.ecommercee.controller.exception.ProductNotFoundException;
+import com.kodilla.ecommercee.controller.exception.UserNotFoundException;
 import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.orders.Item;
 import com.kodilla.ecommercee.domain.orders.Order;
 import com.kodilla.ecommercee.domain.products.Product;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
-import com.kodilla.ecommercee.repository.ProductRepository;
-import com.kodilla.ecommercee.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,45 +21,61 @@ import java.util.List;
 @Transactional
 public class CartService {
     private final CartRepository cartRepository;
-    private final ProductRepository productRepository;
+    private final ProductService productService;
     private final ItemService itemService;
-    private final UserRepository userRepository;
     private final OrderRepository orderRepository;
 
     @Autowired
-    public CartService(CartRepository cartRepository, ProductRepository productRepository,
-                       ItemService itemService, UserRepository userRepository,
-                       OrderRepository orderRepository) {
+    public CartService(CartRepository cartRepository, ProductService productService,
+                       ItemService itemService, OrderRepository orderRepository) {
         this.cartRepository = cartRepository;
-        this.productRepository = productRepository;
+        this.productService = productService;
         this.itemService = itemService;
-        this.userRepository = userRepository;
         this.orderRepository = orderRepository;
     }
 
-    public List<Item> getAllItemInCart(long id) throws CartNotFoundException {
-        return cartRepository.findById(id).orElseThrow(CartNotFoundException::new).getItems();
+    public List<Item> getAllProductInCart(long cartId) throws CartNotFoundException {
+        List<Product> products = productService.getAllProducts();
+        List<Item> items = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new).getItems();
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            Long productIdOfItem = item.getProductId();
+            for (int j = 0; j < products.size(); j++) {
+                Long productIdOfProduct = products.get(j).getProductId();
+                if (productIdOfItem.equals(productIdOfProduct)) {
+                    Item itemToChangePrice = itemService.getItem(item.getId());
+                    itemToChangePrice.setPrice(productService.getProduct(productIdOfProduct).getPrice());
+                    itemService.saveItem(itemToChangePrice);
+                }
+            }
+        }
+        return items;
     }
 
     public Cart saveCart(Cart cart) {
         return cartRepository.save(cart);
     }
 
-    public void createOrderBaseOnCart(Long userId) throws UserNotFoundException {
-        List<Item> items = userRepository.findById(userId).orElseThrow(UserNotFoundException::new)
-                .getCart().getItems();
+    public void createOrderBaseOnCart(Long cartId) throws UserNotFoundException {
+        List<Item> items = cartRepository.findById(cartId).orElseThrow(UserNotFoundException::new)
+                .getItems();
         Order order = new Order(LocalDate.now(), false, items);
         orderRepository.save(order);
+        for (int i = 0; i < items.size(); i++) {
+            Product product = productService.getProductById(items.get(i).getProductId()).orElseThrow(ProductNotFoundException::new);
+            product.setQuantity(product.getQuantity() - items.get(i).getQuantity());
+            productService.saveProduct(product);
+        }
     }
 
-    public void addItemToCart(Long productId, Long cartId, int quantity) throws CartNotFoundException {
-        Product productById = productRepository.getOne(productId);
-        Item item = new Item(productId, productById.getName(), productById.getDescription(), productById.getPrice(), quantity);
+    public void addItemToCart(Long productId, Long cartId, int quantityToCart) throws CartNotFoundException, ProductNotFoundException {
+        Product productById = productService.getProduct(productId);
+        Item item = new Item(productId, productById.getName(), productById.getDescription(), productById.getPrice(), quantityToCart);
         itemService.saveItem(item);
         cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new).getItems().add(item);
     }
 
-    public void deleteItemFromCart(Long itemId, Long cartId) throws CartNotFoundException {
+    public void deleteItemFromCart(Long itemId, Long cartId) throws CartNotFoundException, ItemNotFoundException {
         cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new).
                 getItems().remove(itemService.findItemById(itemId));
     }

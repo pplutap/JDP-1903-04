@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.controller.Exception.ItemNotFoundException;
+import com.kodilla.ecommercee.controller.exception.ItemNotFoundException;
 import com.kodilla.ecommercee.domain.orders.Item;
 import com.kodilla.ecommercee.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,9 @@ public class ItemService {
 
     public Item findItemById(Long itemId) throws ItemNotFoundException{
         return itemRepository.findById(itemId).orElseThrow(ItemNotFoundException::new);
+    }
+    public Item getItem(Long itemId){
+        return itemRepository.getOne(itemId);
     }
 
     public Item saveItem(Item item){

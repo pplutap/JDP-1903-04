@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.carts.CartDto;
 import com.kodilla.ecommercee.domain.orders.Item;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class CartController {
     private final CartService cartService;
     private final CartMapper cartMapper;
 
+    @Autowired
     public CartController(CartService cartService, CartMapper cartMapper) {
         this.cartService = cartService;
         this.cartMapper = cartMapper;
@@ -23,7 +25,7 @@ public class CartController {
 
     @GetMapping(value = "getProductsFromCart")
     public List<Item> getProductsFromCart(@RequestParam Long cartId) {
-        return cartService.getAllItemInCart(cartId);
+        return cartService.getAllProductInCart(cartId);
     }
 
     @PostMapping(value = "createCart", consumes = APPLICATION_JSON_VALUE)
@@ -41,8 +43,8 @@ public class CartController {
         cartService.addItemToCart(productId, cartId, quantity);
     }
 
-    @DeleteMapping(value = "deleteProductFromCart")
-    public void deleteProductFromCart(@RequestParam Long itemId, @RequestParam Long cartId) {
+    @DeleteMapping(value = "deleteItemFromCart")
+    public void deleteItemFromCart(@RequestParam Long itemId, @RequestParam Long cartId) throws com.kodilla.ecommercee.controller.exception.ItemNotFoundException {
         cartService.deleteItemFromCart(itemId, cartId);
     }
 }
