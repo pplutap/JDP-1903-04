@@ -1,71 +1,59 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.products.Product;
 import com.kodilla.ecommercee.domain.products.ProductDto;
+import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/product")
 public class ProductController {
-    private List<ProductDto> products = new ArrayList<>();
+
+    private final ProductService productService;
+    private final ProductMapper productMapper;
+
+    @Autowired
+    public ProductController(ProductService productService, ProductMapper productMapper) {
+        this.productService = productService;
+        this.productMapper = productMapper;
+    }
 
     @GetMapping(value = "getProducts")
     public List<ProductDto> getProducts() {
-        return returnListProduct();
+        return productMapper.mapToProductDtoList(productService.getAllProducts());
     }
 
     @GetMapping(value = "getProduct")
-    public ProductDto getProduct(@RequestParam("productId") long productId) {
-        returnListProduct();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductId().equals(productId)) {
-                return products.get(i);
-            }
-        }
-        return null;
+    public ProductDto getProduct(@RequestParam("productId") long productId) throws ProductNotFoundException {
+        return productMapper.mapToProductDto(productService.getProduct(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId)));
     }
 
-    @PostMapping(value = "createProduct", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "createProduct")
     public void createProduct(@RequestBody ProductDto productDto) {
-        products.add(productDto);
+        productService.saveProduct(productMapper.mapToProduct(productDto));
     }
 
     @PutMapping(value = "updateProduct")
-    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
-        Long productId = productDto.getProductId();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductId().equals(productId)) {
-                products.get(i).setName(productDto.getName());
-                products.get(i).setDescription(productDto.getDescription());
-            }
-        }
-        return productDto;
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) throws ProductNotFoundException{
+        Product product = productService.getProduct(productDto.getProductId())
+                .orElseThrow(() -> new ProductNotFoundException(productDto.getProductId()));
+        product.setName(productDto.getName());
+        product.setDescription(productDto.getDescription());
+        product.setPrice(productDto.getPrice());
+        product.setDeleted(productDto.isDeleted());
+        productService.saveProduct(product);
+
+        return productMapper.mapToProductDto(product);
     }
 
     @DeleteMapping(value = "deleteProduct")
     public void deleteProduct(@RequestParam("productId") long productId) {
-        returnListProduct();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductId().equals(productId)) {
-                products.remove(i);
-            }
-        }
-    }
-
-    private List<ProductDto> returnListProduct() {
-        ProductDto computer = new ProductDto(1L, "computer", "computer_desc", new BigDecimal(250),
-                false);
-        ProductDto laptop = new ProductDto(2L, "laptop", "laptop_desc", new BigDecimal(150),
-                false);
-        if (products.isEmpty()) {
-            products.add(computer);
-            products.add(laptop);
-        }
-        return products;
+        productService.deleteProduct(productId);
     }
 }
