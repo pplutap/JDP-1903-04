@@ -15,7 +15,7 @@ public class GroupService {
     private final GroupRepository groupRepository;
 
     @Autowired
-    public GroupService(GroupRepository groupRepository) {
+    public GroupService(final GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
     }
 

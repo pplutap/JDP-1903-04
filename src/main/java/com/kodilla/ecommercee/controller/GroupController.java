@@ -2,7 +2,7 @@ package com.kodilla.ecommercee.controller;
 
 
 import com.kodilla.ecommercee.domain.groups.GroupDto;
-import com.kodilla.ecommercee.exception.GroupNotFoundException;
+import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/v1/group")
 public class GroupController {
     private final GroupService groupService;
-    private GroupMapper groupMapper;
+    private final GroupMapper groupMapper;
 
     @Autowired
     public GroupController(GroupService groupService, GroupMapper groupMapper) {
