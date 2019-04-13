@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain.orders;
 
 import com.kodilla.ecommercee.domain.users.User;
-import com.kodilla.ecommercee.domain.users.UserBuilder;
 import com.kodilla.ecommercee.repository.ItemRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
@@ -135,7 +134,7 @@ public class OrderEntityTestSuite {
         Order order1 = new Order();
         Order order2 = new Order();
 
-        User user = new UserBuilder().setOrders(new ArrayList<>()).createUser();
+        User user = new User.UserBuilder().build();
 
         user.getOrders().add(order1);
         user.getOrders().add(order2);
