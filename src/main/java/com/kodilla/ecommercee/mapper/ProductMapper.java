@@ -14,6 +14,11 @@ public class ProductMapper {
         return new Product(productDto.getName(), productDto.getDescription(), productDto.getPrice(), productDto.getQuantity());
     }
 
+    public ProductDto mapToProductDto(final Product product){
+        return new ProductDto(product.getProductId(),product.getName(),
+                product.getDescription(),product.getPrice(),product.isDeleted());
+    }
+
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
         return products.stream()
                 .map(product -> new ProductDto(product.getProductId(), product.getName(), product.getDescription(),

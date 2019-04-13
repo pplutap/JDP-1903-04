@@ -12,15 +12,15 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ProductService {
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(final ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     public List<Product> getAllProducts() {
-        return (List<Product>) productRepository.findAll();
+        return productRepository.findAll();
     }
 
     public Optional<Product> getProduct(final Long id) {

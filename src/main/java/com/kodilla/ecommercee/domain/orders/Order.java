@@ -2,16 +2,14 @@ package com.kodilla.ecommercee.domain.orders;
 
 import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.users.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
@@ -34,12 +32,18 @@ public class Order {
             fetch = FetchType.LAZY
     )
     private List<Item> items = new ArrayList<>();
-
     @Column(name = "is_paid")
     private boolean paid;
 
     public Order(LocalDate date, boolean paid,List<Item> items) {
         this.date = date;
+        this.paid = paid;
+    }
+
+    public Order(LocalDate date, User user, List<Item> items, boolean paid) {
+        this.date = date;
+        this.user = user;
+        this.items = items;
         this.paid = paid;
     }
 }
