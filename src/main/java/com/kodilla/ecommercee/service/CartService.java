@@ -35,8 +35,13 @@ public class CartService {
     }
 
     public List<Item> getAllProductInCart(long cartId) throws CartNotFoundException {
-        List<Product> products = productService.getAllProducts();
         List<Item> items = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new).getItems();
+        updatePriceOfItemAfterChangePriceOfProduct(items);
+        return items;
+    }
+
+    private void updatePriceOfItemAfterChangePriceOfProduct(List<Item> items) {
+        List<Product> products = productService.getAllProducts();
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
             Long productIdOfItem = item.getProductId();
@@ -49,7 +54,6 @@ public class CartService {
                 }
             }
         }
-        return items;
     }
 
     public Cart saveCart(Cart cart) {
@@ -61,6 +65,10 @@ public class CartService {
                 .getItems();
         Order order = new Order(LocalDate.now(), false, items);
         orderRepository.save(order);
+        updateQuantityOfProduct(items);
+    }
+
+    private void updateQuantityOfProduct(List<Item> items) {
         for (int i = 0; i < items.size(); i++) {
             Product product = productService.getProductById(items.get(i).getProductId()).orElseThrow(ProductNotFoundException::new);
             product.setQuantity(product.getQuantity() - items.get(i).getQuantity());
