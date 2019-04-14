@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain.orders;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
