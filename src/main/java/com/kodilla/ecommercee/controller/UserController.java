@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.controller.exceptions.UserNotFoundException;
-import com.kodilla.ecommercee.domain.users.GuavaCacheService;
+import com.kodilla.ecommercee.exceptions.UserNotFoundException;
+import com.kodilla.ecommercee.domain.users.TokenService;
 import com.kodilla.ecommercee.domain.users.UserDto;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.UserService;
@@ -20,6 +20,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping(value = "createUser", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
@@ -31,8 +33,8 @@ public class UserController {
         return userMapper.userToUserDto(userService.blockUser(id));
     }
 
-    @GetMapping(value = "getToken")
-    public Long getToken(@RequestParam Long userId) throws UserNotFoundException, ExecutionException {
-        return GuavaCacheService.getUserCache().get(userService.getUserById(userId));
+    @PutMapping(value = "generateToken")
+    public void generateToken(@RequestParam Long userId) throws UserNotFoundException, ExecutionException {
+        userService.getUserById(userId).setToken(tokenService.getUserCache().get(userService.getUserById(userId)));
     }
 }

@@ -15,10 +15,10 @@ public class UserMapper {
     }
 
     public User userDtoToUser(UserDto userDto){
-        return new User(userDto.getUsername());
+        return new User(userDto.getUsername(), userDto.getUserMail());
     }
 
     public UserDto userToUserDto(User user){
-        return new UserDto(user.getUserId(), user.getUsername(), user.isBlocked(), cartMapper.mapToCartDto(user.getCart()), user.getOrders());
+        return new UserDto(user.getUserId(), user.getUsername(),user.getUserMail(), user.isBlocked(), cartMapper.mapToCartDto(user.getCart()), user.getOrders());
     }
 }

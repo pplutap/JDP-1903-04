@@ -25,8 +25,14 @@ public class User {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "mail")
+    private String userMail;
+
     @Column(name = "is_blocked")
     private boolean blocked;
+
+    @Column(name = "token")
+    private Long token;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "cart_id")
@@ -40,23 +46,10 @@ public class User {
     )
     private List<Order> orders = new ArrayList<>();
 
-    public User(String username) {
+    public User(String username, String userMail) {
         this.username = username;
+        this.userMail = userMail;
         this.cart = new Cart();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        return userId.equals(user.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31* userId.hashCode();
-    }
 }
