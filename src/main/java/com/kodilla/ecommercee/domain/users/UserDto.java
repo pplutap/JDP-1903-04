@@ -15,9 +15,17 @@ import java.util.List;
 @Getter
 @Setter
 public class UserDto {
+
     private Long id;
     private String username;
+    private String userMail;
     private boolean blocked;
     private CartDto cart;
     private List<Order> orders = new ArrayList<>();
+
+    public UserDto(String username, String userMail) {
+
+        this.username = username;
+        this.userMail = userMail;
+    }
 }
