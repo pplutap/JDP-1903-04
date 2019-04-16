@@ -1,15 +1,12 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.carts.CartDto;
-import com.kodilla.ecommercee.domain.products.Product;
-import com.kodilla.ecommercee.domain.products.ProductDto;
-import com.kodilla.ecommercee.mapper.ProductMapper;
-import com.kodilla.ecommercee.service.ProductService;
+import com.kodilla.ecommercee.domain.orders.Item;
+import com.kodilla.ecommercee.mapper.CartMapper;
+import com.kodilla.ecommercee.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -17,40 +14,37 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/v1/cart")
 public class CartController {
-    private ProductMapper productMapper;
-    private ProductService productService;
+    private final CartService cartService;
+    private final CartMapper cartMapper;
 
     @Autowired
-    public CartController(ProductMapper productMapper, ProductService productService) {
-        this.productMapper = productMapper;
-        this.productService = productService;
+    public CartController(CartService cartService, CartMapper cartMapper) {
+        this.cartService = cartService;
+        this.cartMapper = cartMapper;
     }
 
     @GetMapping(value = "getProductsFromCart")
-    public List<ProductDto> getProductsFromCart(@RequestParam Long cartId) {
-        Product jam = new Product("Jam", "Strawberry jam", new BigDecimal(5));
-        Cart cart1 = new Cart(cartId, productService.getAllProducts());
-        cart1.getProducts().add(jam);
-        return productMapper.mapToProductDtoList(cart1.getProducts());
+    public List<Item> getProductsFromCart(@RequestParam Long cartId) {
+        return cartService.getAllProductInCart(cartId);
     }
 
     @PostMapping(value = "createCart", consumes = APPLICATION_JSON_VALUE)
     public void createCart(@RequestBody CartDto cartDto) {
-
+        cartService.saveCart(cartMapper.mapToCart(cartDto));
     }
 
     @PostMapping(value = "createOrder", consumes = APPLICATION_JSON_VALUE)
-    public void createOrder(@RequestBody CartDto cartDto) {
-
+    public void createOrder(@RequestParam Long userId) {
+        cartService.createOrderBaseOnCart(userId);
     }
 
     @PostMapping(value = "addItemToCart", consumes = APPLICATION_JSON_VALUE)
-    public void addItemToCart(@RequestBody ProductDto productDto, @RequestParam Long cartId) {
-
+    public void addItemToCart(@RequestParam Long productId, @RequestParam Long cartId, @RequestParam Integer quantity) {
+        cartService.addItemToCart(productId, cartId, quantity);
     }
 
-    @DeleteMapping(value = "deleteProductFromCart")
-    public void deleteProductFromCart(@RequestParam Long productId, Long cartId) {
-
+    @DeleteMapping(value = "deleteItemFromCart")
+    public void deleteItemFromCart(@RequestParam Long itemId, @RequestParam Long cartId) throws com.kodilla.ecommercee.controller.exception.ItemNotFoundException {
+        cartService.deleteItemFromCart(itemId, cartId);
     }
 }

@@ -33,16 +33,17 @@ public class Product {
     @Column(name = "is_deleted")
     private boolean deleted;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
-    private List<Cart> carts = new ArrayList<>();
+    @Column(name = "quantity")
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
 
-    public Product(String name, String description, BigDecimal price) {
+    public Product(String name, String description, BigDecimal price, int quantity) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.quantity = quantity;
     }
 }
