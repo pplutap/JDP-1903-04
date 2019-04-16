@@ -8,6 +8,7 @@ import com.kodilla.ecommercee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -35,6 +36,6 @@ public class UserController {
 
     @PutMapping(value = "generateToken")
     public void generateToken(@RequestParam Long userId) throws UserNotFoundException, ExecutionException {
-        userService.getUserById(userId).setToken(tokenService.getUserCache().get(userService.getUserById(userId)));
+        tokenService.getUserCache().get(userService.getUserById(userId));
     }
 }

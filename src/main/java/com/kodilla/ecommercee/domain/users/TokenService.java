@@ -11,27 +11,27 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class TokenService {
 
-    private LoadingCache<User, Long> userCache;
+    private LoadingCache<User, UUID> userCache;
 
     public TokenService() {
         this.userCache = CacheBuilder.newBuilder()
                 .maximumSize(10000)
                 .expireAfterAccess(5, TimeUnit.MINUTES) //Narazie do testow
                 .build(
-                        new CacheLoader<User, Long>() {
+                        new CacheLoader<User, UUID>() {
                             @Override
-                            public Long load(User key) throws Exception {
+                            public UUID load(User key) throws Exception {
                                 return generateToken();
                             }
                         }
                 );
     }
 
-    private Long generateToken() {
-        return UUID.randomUUID().getMostSignificantBits()&Long.MAX_VALUE;
+    private UUID generateToken() {
+        return UUID.randomUUID();
     }
 
-    public LoadingCache<User, Long> getUserCache() {
+    public LoadingCache<User, UUID> getUserCache() {
         return userCache;
     }
 }

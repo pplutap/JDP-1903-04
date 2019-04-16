@@ -31,9 +31,6 @@ public class User {
     @Column(name = "is_blocked")
     private boolean blocked;
 
-    @Column(name = "token")
-    private Long token;
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "cart_id")
     private Cart cart;
