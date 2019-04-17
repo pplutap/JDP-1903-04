@@ -7,22 +7,23 @@ import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
 
+    private final UserService userService;
+    private final UserMapper userMapper;
+    private final TokenService tokenService;
+
     @Autowired
-    private UserService userService;
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private TokenService tokenService;
+    public UserController(UserService userService, UserMapper userMapper, TokenService tokenService) {
+        this.userService = userService;
+        this.userMapper = userMapper;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping(value = "createUser", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class TokenService {
 
-    private LoadingCache<User, UUID> userCache;
+    private final LoadingCache<User, UUID> userCache;
 
     public TokenService() {
         this.userCache = CacheBuilder.newBuilder()
