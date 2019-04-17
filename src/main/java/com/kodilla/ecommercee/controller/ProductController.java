@@ -37,7 +37,7 @@ public class ProductController {
 
     @GetMapping(value = "getProduct")
     public ProductDto getProduct(@RequestParam("productId") long productId) throws ProductNotFoundException {
-        return productMapper.mapToProductDto(productService.getProduct(productId)
+        return productMapper.mapToProductDto(productService.getProductById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId)));
     }
 
@@ -48,7 +48,7 @@ public class ProductController {
 
     @PutMapping(value = "updateProduct")
     public ProductDto updateProduct(@RequestBody ProductDto productDto) throws ProductNotFoundException{
-        Product product = productService.getProduct(productDto.getProductId())
+        Product product = productService.getProductById(productDto.getProductId())
                 .orElseThrow(() -> new ProductNotFoundException(productDto.getProductId()));
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());

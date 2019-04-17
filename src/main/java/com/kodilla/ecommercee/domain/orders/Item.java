@@ -1,12 +1,15 @@
 package com.kodilla.ecommercee.domain.orders;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,11 +33,11 @@ public class Item {
     @Column(name = "product_description")
     private String productDescription;
     @Column(name = "price")
-    private Double price;
+    private BigDecimal price;
     @Column(name = "quantity")
-    private Double quantity;
+    private int quantity;
 
-    public Item(@NotNull Long productId, String productName, String productDescription, Double price, Double quantity) {
+    public Item(@NotNull Long productId, String productName, String productDescription, BigDecimal price, int quantity) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;

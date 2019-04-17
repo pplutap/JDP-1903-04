@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +40,8 @@ public class OrderEntityTestSuite {
     @Test
     public void testOrderSaveWithItems() {
         //Given
-        Item item1 = new Item(1L, "TestName1", "TestDesc1", 2.5, 2.0);
-        Item item2 = new Item(2L, "TestName2", "TestDesc2", 3.5, 3.0);
+        Item item1 = new Item(1L, "TestName1", "TestDesc1", new BigDecimal(2.5), 2);
+        Item item2 = new Item(2L, "TestName2", "TestDesc2", new BigDecimal(2.5), 3);
 
         Order order = new Order();
         order.getItems().add(item1);
@@ -93,7 +94,7 @@ public class OrderEntityTestSuite {
     public void testOrderSaveWhenItemIsNull() {
         //Given
         Item item1 = null;
-        Item item2 = new Item(2L, "TestName2", "TestDesc2", 3.5, 3.0);
+        Item item2 = new Item(2L, "TestName2", "TestDesc2", new BigDecimal(3.5), 1);
 
         Order order = new Order();
         order.getItems().add(item1);
