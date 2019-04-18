@@ -35,6 +35,8 @@ dependencies {
     compile group: 'com.opencsv', name: 'opencsv', version: '4.1'
     compile group: 'com.google.guava', name: 'guava', version: '27.0.1-jre'
     compile group: 'com.opencsv', name: 'opencsv', version: '4.1'
+    compile ('org.springframework.boot:spring-boot-starter-mail:1.5.7.RELEASE')
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8'
 
 
 }
