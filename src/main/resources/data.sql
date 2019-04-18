@@ -1,4 +1,4 @@
-﻿insert into 'group' (id, group_name) values (1,"Piwa");
+﻿insert into `group` (id, group_name) values (1,"Piwa");
 insert into `group` (id, group_name) values (2, "Wódki");
 insert into `group` (id, group_name) values (3, "Whisky");
 insert into `group` (id, group_name) values (4, "Wina Biale");
