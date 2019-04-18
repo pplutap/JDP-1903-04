@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -67,8 +65,6 @@ public class ProductController {
     @PostMapping(value = "addNewProducts")
     public void addNewsFromCSV(@RequestParam String header)throws IOException {
 
-        List<List<String>> records = new ArrayList<>();
-
         try (CSVReader csvReader = new CSVReader(new FileReader("resources/products.csv"));) {
             String[] values = null;
 
@@ -77,16 +73,13 @@ public class ProductController {
             }
 
             while ((values = csvReader.readNext()) != null) {
-                records.add(Arrays.asList(values));
+
+                values = values[0].split(";");
+                productService.saveProduct(new Product(values[0],values[1],new BigDecimal(values[2])));
+
             }
         }catch (IOException e){
 
-        }
-
-        for (List<String> list:records) {
-            String[] array = list.get(0).split(";");
-
-            productService.saveProduct(new Product(array[0],array[1],new BigDecimal(array[2])));
         }
     }
 }
