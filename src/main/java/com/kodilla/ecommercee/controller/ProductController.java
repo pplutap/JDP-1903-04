@@ -75,7 +75,7 @@ public class ProductController {
             while ((values = csvReader.readNext()) != null) {
 
                 values = values[0].split(";");
-                productService.saveProduct(new Product(values[0],values[1],new BigDecimal(values[2])));
+                productService.saveProduct(new Product(values[0],values[1],new BigDecimal(values[2]),0));
 
             }
         }catch (IOException e){

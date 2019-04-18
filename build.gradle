@@ -33,5 +33,6 @@ dependencies {
     compile ('org.projectlombok:lombok')
     implementation ('org.springframework.boot:spring-boot-starter-jdbc')
     compile group: 'com.google.guava', name: 'guava', version: '27.0.1-jre'
+    compile group: 'com.opencsv', name: 'opencsv', version: '4.1'
 
 }
