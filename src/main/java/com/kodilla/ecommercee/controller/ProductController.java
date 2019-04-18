@@ -7,6 +7,8 @@ import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductService;
 import com.opencsv.CSVReader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/product")
 public class ProductController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService productService;
     private final ProductMapper productMapper;
@@ -79,7 +83,7 @@ public class ProductController {
 
             }
         }catch (IOException e){
-
+            LOGGER.error("Failed to process import form .CSV file: ", e.getMessage(), e);
         }
     }
 }
