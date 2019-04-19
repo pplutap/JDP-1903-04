@@ -1,45 +1,43 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.exceptions.UserNotFoundException;
+import com.kodilla.ecommercee.domain.users.TokenService;
 import com.kodilla.ecommercee.domain.users.UserDto;
+import com.kodilla.ecommercee.mapper.UserMapper;
+import com.kodilla.ecommercee.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import java.util.concurrent.ExecutionException;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
-    private List<UserDto> users = new ArrayList<>();
+
+    private final UserService userService;
+    private final UserMapper userMapper;
+    private final TokenService tokenService;
+
+    @Autowired
+    public UserController(UserService userService, UserMapper userMapper, TokenService tokenService) {
+        this.userService = userService;
+        this.userMapper = userMapper;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping(value = "createUser", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
-        users.add(userDto);
+        userService.saveUser(userMapper.userDtoToUser(userDto));
     }
 
-    @PutMapping(value = "badUser")
-    public UserDto badUser(@RequestBody Long id) {
-        UserDto user = getUserForSpecificID(id);
-        user.setBlocked(false);
-        return user;
+    @PutMapping(value = "blockUser")
+    public UserDto blockUser(@RequestParam Long id) throws UserNotFoundException {
+        return userMapper.userToUserDto(userService.blockUser(id));
     }
 
-    @GetMapping(value = "getToken", consumes = APPLICATION_JSON_VALUE)
-    public Long getToken(@RequestBody Long userId) {
-        Random random = new Random();
-        Long randomLong = random.nextLong();
-        return randomLong;
-    }
-
-    private UserDto getUserForSpecificID(Long id) {
-        for (UserDto user : users) {
-            if (user.getId() == id) {
-                return user;
-            }
-        }
-        return null;
+    @PutMapping(value = "generateToken")
+    public void generateToken(@RequestParam Long userId) throws UserNotFoundException, ExecutionException {
+        tokenService.getUserCache().get(userService.getUserById(userId));
     }
 }

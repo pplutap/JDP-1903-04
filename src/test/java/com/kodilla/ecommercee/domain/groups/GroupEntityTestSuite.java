@@ -40,8 +40,8 @@ public class GroupEntityTestSuite {
     @Test
     public void shouldReturnNotNullGroupIdAndProductIds() {
         //Given
-        Product huaweiP20 = new Product("huawei p20 pro", "huawei is good phone", new BigDecimal(2300));
-        Product samsungS8 = new Product("samsung S8", "samsung is good phone", new BigDecimal(1999));
+        Product huaweiP20 = new Product("huawei p20 pro", "huawei is good phone", new BigDecimal(2300),2);
+        Product samsungS8 = new Product("samsung S8", "samsung is good phone", new BigDecimal(1999),2);
         List<Product> smartphones = new ArrayList<>();
         smartphones.add(huaweiP20);
         smartphones.add(samsungS8);
@@ -69,7 +69,7 @@ public class GroupEntityTestSuite {
     public void shouldReturnNotNullGroupIdAndSamsung8GroupId() {
         //given
         Product huaweiP20 = null;
-        Product samsungS8 = new Product("samsung S8", "samsung is good phone", new BigDecimal(1999));
+        Product samsungS8 = new Product("samsung S8", "samsung is good phone", new BigDecimal(1999),2);
         List<Product> smartphones = new ArrayList<>();
         smartphones.add(huaweiP20);
         smartphones.add(samsungS8);

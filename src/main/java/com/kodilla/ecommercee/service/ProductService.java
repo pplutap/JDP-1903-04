@@ -23,8 +23,12 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Product> getProduct(final Long id) {
+    public Optional<Product> getProductById(final Long id) {
         return productRepository.findById(id);
+    }
+
+    public Product getProduct(Long productId){
+        return productRepository.getOne(productId);
     }
 
     public Product saveProduct(final Product product) {

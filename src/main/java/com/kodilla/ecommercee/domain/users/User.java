@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
 @Entity(name = "user")
@@ -25,6 +24,9 @@ public class User {
 
     @Column(name = "username")
     private String username;
+
+    @Column(name = "mail")
+    private String userMail;
 
     @Column(name = "is_blocked")
     private boolean blocked;
@@ -41,10 +43,10 @@ public class User {
     )
     private List<Order> orders = new ArrayList<>();
 
-    public User(String username, boolean blocked, Cart cart) {
+    public User(String username, String userMail) {
         this.username = username;
-        this.blocked = blocked;
-        this.cart = cart;
+        this.userMail = userMail;
+        this.cart = new Cart();
     }
 
 }
