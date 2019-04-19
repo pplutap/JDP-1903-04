@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.ExecutionException;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
