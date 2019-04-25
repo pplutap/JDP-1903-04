@@ -40,8 +40,8 @@ public class OrderEntityTestSuite {
     @Test
     public void testOrderSaveWithItems() {
         //Given
-        Item item1 = new Item(1L, "TestName1", "TestDesc1", new BigDecimal(2.5), 2);
-        Item item2 = new Item(2L, "TestName2", "TestDesc2", new BigDecimal(2.5), 3);
+        Item item1 = new Item(1L, "TestName1",  new BigDecimal(2.5), 2);
+        Item item2 = new Item(2L, "TestName2",  new BigDecimal(2.5), 3);
 
         Order order = new Order();
         order.getItems().add(item1);
@@ -94,7 +94,7 @@ public class OrderEntityTestSuite {
     public void testOrderSaveWhenItemIsNull() {
         //Given
         Item item1 = null;
-        Item item2 = new Item(2L, "TestName2", "TestDesc2", new BigDecimal(3.5), 1);
+        Item item2 = new Item(2L, "TestName2", new BigDecimal(3.5), 1);
 
         Order order = new Order();
         order.getItems().add(item1);

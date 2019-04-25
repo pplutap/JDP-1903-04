@@ -78,7 +78,7 @@ public class CartService {
 
     public void addItemToCart(Long productId, Long cartId, int quantityToCart) throws CartNotFoundException, ProductNotFoundException {
         Product productById = productService.getProduct(productId);
-        Item item = new Item(productId, productById.getName(), productById.getDescription(), productById.getPrice(), quantityToCart);
+        Item item = new Item(productId, productById.getName(), productById.getPrice(), quantityToCart);
         itemService.saveItem(item);
         cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new).getItems().add(item);
     }
