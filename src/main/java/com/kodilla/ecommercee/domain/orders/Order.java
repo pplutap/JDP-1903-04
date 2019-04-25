@@ -35,12 +35,49 @@ public class Order {
     @Column(name = "is_paid")
     private boolean paid;
 
-    public Order(LocalDate date, boolean paid,List<Item> items) {
+    public static class OrderBuilder {
+
+        private LocalDate date;
+        private boolean paid;
+        private List<Item> items = new ArrayList<>();
+        private User user;
+
+        public OrderBuilder date(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+
+        public OrderBuilder paid(boolean paid) {
+            this.paid = paid;
+            return this;
+        }
+
+        public OrderBuilder items(List<Item> items) {
+            this.items = items;
+            return this;
+        }
+
+        public OrderBuilder user(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public Order buldWithoutUser() {
+            return new Order(date, items, paid);
+        }
+
+        public Order buildWithUser() {
+            return new Order(date, user, items, paid);
+        }
+
+    }
+
+    private Order(LocalDate date,List<Item> items, boolean paid) {
         this.date = date;
         this.paid = paid;
     }
 
-    public Order(LocalDate date, User user, List<Item> items, boolean paid) {
+    private Order(LocalDate date, User user, List<Item> items, boolean paid) {
         this.date = date;
         this.user = user;
         this.items = items;

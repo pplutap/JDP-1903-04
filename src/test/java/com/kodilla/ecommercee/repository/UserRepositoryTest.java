@@ -86,8 +86,18 @@ public class UserRepositoryTest {
     public void relationUserOrderTest(){
         //Given
         User user = new User();
-        Order order1 = new Order(LocalDate.now(), user, new ArrayList<>(), false);
-        Order order2 = new Order(LocalDate.now(), user, new ArrayList<>(), true);
+        Order order1 = new Order.OrderBuilder()
+                            .date(LocalDate.now())
+                            .paid(false)
+                            .items(new ArrayList<>())
+                            .user(user)
+                            .buildWithUser();
+        Order order2 = new Order.OrderBuilder()
+                            .date(LocalDate.now())
+                            .paid(true)
+                            .items(new ArrayList<>())
+                            .user(user)
+                            .buildWithUser();
         user.getOrders().add(order1);
         user.getOrders().add(order2);
         //When
