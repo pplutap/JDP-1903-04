@@ -30,17 +30,54 @@ public class Item {
     private Long productId;
     @Column(name = "product_name")
     private String productName;
-    @Column(name = "product_description")
-    private String productDescription;
+
     @Column(name = "price")
     private BigDecimal price;
     @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
 
-    public Item(@NotNull Long productId, String productName, String productDescription, BigDecimal price, int quantity) {
+    public static class ItemBuilder {
+
+        private Long productId;
+        private String productName;
+        private String productDescription;
+        private BigDecimal price;
+        private int quantity;
+
+        public ItemBuilder productId(Long productId) {
+            this.productId = productId;
+            return this;
+        }
+
+        public ItemBuilder productName(String productName) {
+            this.productName = productName;
+            return this;
+        }
+
+        public ItemBuilder productDescription(String productDescription) {
+            this.productDescription = productDescription;
+            return this;
+        }
+
+        public ItemBuilder price(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+
+        public ItemBuilder quantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public Item build() {
+            return new Item(productId, productName, productDescription, price, quantity);
+        }
+
+    }
+
+    private Item(@NotNull Long productId, String productName, String productDescription, BigDecimal price, int quantity) {
         this.productId = productId;
         this.productName = productName;
-        this.productDescription = productDescription;
         this.price = price;
         this.quantity = quantity;
     }

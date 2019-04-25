@@ -63,7 +63,11 @@ public class CartService {
     public void createOrderBaseOnCart(Long cartId) throws UserNotFoundException {
         List<Item> items = cartRepository.findById(cartId).orElseThrow(UserNotFoundException::new)
                 .getItems();
-        Order order = new Order(LocalDate.now(), false, items);
+        Order order = new Order.OrderBuilder()
+                          .date(LocalDate.now())
+                          .paid(false)
+                          .items(items)
+                          .buldWithoutUser();
         orderRepository.save(order);
         updateQuantityOfProduct(items);
     }
@@ -78,7 +82,13 @@ public class CartService {
 
     public void addItemToCart(Long productId, Long cartId, int quantityToCart) throws CartNotFoundException, ProductNotFoundException {
         Product productById = productService.getProduct(productId);
-        Item item = new Item(productId, productById.getName(), productById.getDescription(), productById.getPrice(), quantityToCart);
+        Item item = new Item.ItemBuilder()
+                        .productId(productId)
+                        .productName(productById.getName())
+                        .productDescription(productById.getDescription())
+                        .price(productById.getPrice())
+                        .quantity(productById.getQuantity())
+                        .build();
         itemService.saveItem(item);
         cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new).getItems().add(item);
     }
