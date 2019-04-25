@@ -54,7 +54,6 @@ public class OrderEntityTestSuite {
                         .price(new BigDecimal(2.5))
                         .quantity(3)
                         .build();
-
         Order order = new Order();
         order.getItems().add(item1);
         order.getItems().add(item2);
@@ -113,7 +112,6 @@ public class OrderEntityTestSuite {
                 .price(new BigDecimal(3.5))
                 .quantity(1)
                 .build();
-
         Order order = new Order();
         order.getItems().add(item1);
         order.getItems().add(item2);

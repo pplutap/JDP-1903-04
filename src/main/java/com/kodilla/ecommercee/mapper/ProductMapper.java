@@ -11,25 +11,46 @@ import java.util.stream.Collectors;
 public class ProductMapper {
 
     public Product mapToProduct(final ProductDto productDto) {
-        return new Product(productDto.getName(), productDto.getDescription(), productDto.getPrice(), productDto.getQuantity());
+        return new Product.ProductBuilder()
+                        .name(productDto.getName())
+                        .description(productDto.getDescription())
+                        .price(productDto.getPrice())
+                        .quantity(productDto.getQuantity())
+                        .build();
     }
 
-    public ProductDto mapToProductDto(final Product product){
-        return new ProductDto(product.getProductId(),product.getName(),
-                product.getDescription(),product.getPrice(),product.isDeleted(), product.getQuantity());
+    public ProductDto mapToProductDto(final Product product) {
+        return new ProductDto.ProductDtoBuilder()
+                .productId(product.getProductId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .deleted()
+                .price(product.getPrice())
+                .quantity(product.getQuantity())
+                .build();
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
         return products.stream()
-                .map(product -> new ProductDto(product.getProductId(), product.getName(), product.getDescription(),
-                        product.getPrice(), product.isDeleted(), product.getQuantity()))
+                .map(product -> new ProductDto.ProductDtoBuilder()
+                        .productId(product.getProductId())
+                        .name(product.getName())
+                        .description(product.getDescription())
+                        .deleted()
+                        .price(product.getPrice())
+                        .quantity(product.getQuantity())
+                        .build())
                 .collect(Collectors.toList());
     }
 
     public List<Product> mapToProductList(final List<ProductDto> productDtoList) {
         return productDtoList.stream()
-                .map(productDto -> new Product(productDto.getName(), productDto.getDescription(),
-                        productDto.getPrice(), productDto.getQuantity()))
+                .map(productDto -> new Product.ProductBuilder()
+                        .name(productDto.getName())
+                        .description(productDto.getDescription())
+                        .price(productDto.getPrice())
+                        .quantity(productDto.getQuantity())
+                        .build())
                 .collect(Collectors.toList());
     }
 }

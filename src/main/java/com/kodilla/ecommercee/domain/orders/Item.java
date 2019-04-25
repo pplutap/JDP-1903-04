@@ -30,8 +30,7 @@ public class Item {
     private Long productId;
     @Column(name = "product_name")
     private String productName;
-    @Column(name = "product_description")
-    private String productDescription;
+
     @Column(name = "price")
     private BigDecimal price;
     @Column(name = "quantity")
@@ -79,7 +78,6 @@ public class Item {
     private Item(@NotNull Long productId, String productName, String productDescription, BigDecimal price, int quantity) {
         this.productId = productId;
         this.productName = productName;
-        this.productDescription = productDescription;
         this.price = price;
         this.quantity = quantity;
     }
