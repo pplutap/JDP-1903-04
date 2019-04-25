@@ -18,13 +18,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/order")
 public class OrderController {
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
     private final UserRepository userRepository;
     private final SimpleEmailService simpleEmailService;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository, UserRepository userRepository, SimpleEmailService simpleEmailService) {
-        this.orderRepository = orderRepository;
+    public OrderController(OrderService orderService, UserRepository userRepository, SimpleEmailService simpleEmailService) {
+        this.orderService = orderService;
         this.userRepository = userRepository;
         this.simpleEmailService = simpleEmailService;
     }
@@ -38,7 +38,7 @@ public class OrderController {
     @PostMapping("/createOrder")
     private void createOrder(@RequestBody Order order){
 
-        orderRepository.save(order);
+        orderService.saveOrder(order);
 
         Long orderId = order.getId();
         Long userId = order.getUser().getUserId();
