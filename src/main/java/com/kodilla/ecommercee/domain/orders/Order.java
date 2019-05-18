@@ -1,9 +1,7 @@
 package com.kodilla.ecommercee.domain.orders;
 
-import com.kodilla.ecommercee.domain.carts.Cart;
 import com.kodilla.ecommercee.domain.users.User;
 import lombok.*;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import javax.persistence.*;
 import java.time.LocalDate;

@@ -1,14 +1,12 @@
 package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.orders.Order;
-import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NamedNativeQuery;
 import java.util.List;
 
 @Repository
