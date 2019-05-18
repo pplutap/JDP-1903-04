@@ -34,5 +34,9 @@ public class OrderService {
     public void deleteOrder(final Long id) {
         orderRepository.deleteById(id);
     }
+
+    public void closeOrder(final Long id) {
+        orderRepository.closeOrder(id);
+    }
 }
 

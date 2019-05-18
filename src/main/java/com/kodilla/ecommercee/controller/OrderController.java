@@ -4,7 +4,6 @@ import com.kodilla.ecommercee.domain.users.User;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.mail.Mail;
-import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import com.kodilla.ecommercee.service.SimpleEmailService;
 import com.kodilla.ecommercee.service.OrderService;
@@ -64,5 +63,10 @@ public class OrderController {
     @DeleteMapping("/deleteOrder")
     public void deleteOrder(@RequestParam("id") long id){
         orderService.deleteOrder(id);
+    }
+
+    @PutMapping("/closedOrder")
+    public void closedOrder(@RequestParam Long orderId) {
+        orderService.closeOrder(orderId);
     }
 }
